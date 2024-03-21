@@ -1,8 +1,8 @@
 # Music Visualiser Project
 
-Name:
+Names: Oisin Cruise, Conor Fee, Mark Langan, Jake Walsh
 
-Student Number: 
+Student Number: C22517166, C22414306, C22470414, C22493266
 
 ## Instructions
 - Fork this repository and use it a starter project for your assignment
