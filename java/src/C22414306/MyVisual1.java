@@ -1,34 +1,21 @@
 package C22414306;
 
 import ddf.minim.AudioPlayer;
-import ddf.minim.AudioBuffer;
 import ie.tudublin.*;
 
 public class MyVisual1 extends Visual
 {
 
     private AudioPlayer ap;
-    private AudioBuffer ab;
 
     int mode = 0;
-    // Flag to track if audio is playing
-    //
-    //private boolean isPlaying = false;
 
     public void keyPressed() 
     {
-        if (key >= '0' && key <= '9')
+        if (key == ' ') 
         {
-			mode = key - '0';
-		}
-		if (keyCode == ' ') 
-        {
-            if (ap.isPlaying()) {
-                ap.pause();
-            } else {
-                ap.rewind();
-                ap.play();
-            }
+            getAudioPlayer().cue(0);
+            getAudioPlayer().play();
         }
 	}
 
@@ -41,7 +28,8 @@ public class MyVisual1 extends Visual
     {
         startMinim();
         loadAudio("stayinit.mp3");
-        colorMode(HSB);
+
+        startListening();
         
     }
 
