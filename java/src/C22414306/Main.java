@@ -1,7 +1,6 @@
 package C22414306;
 
-import ie.tudublin.Visual;
-import ie.tudublin.VisualException;
+import ie.tudublin.*;
 
 public class Main
 {
