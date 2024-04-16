@@ -4,11 +4,12 @@ import example.CubeVisual;
 import example.MyVisual;
 import example.RotatingAudioBands;
 
-public class Main {
+public class Main  {
     
-    public void startUI() {
+    public void startUI() 
+    {
         String[] a = { "MAIN" };
-        processing.core.PApplet.runSketch(a, new MyVisual());
+        processing.core.PApplet.runSketch(a, new  MyVisual());
     }
 
     // test commit..

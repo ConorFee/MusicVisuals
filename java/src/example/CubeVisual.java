@@ -28,7 +28,7 @@ public class CubeVisual extends Visual
         }
     }
 
-    public void setup()
+    public void setup() 
     {
         colorMode(HSB);
         noCursor();
