@@ -14,7 +14,6 @@ public class MyVisual1 extends Visual
     {
         if (key == ' ') 
         {
-            getAudioPlayer().cue(0);
             getAudioPlayer().play();
         }
 	}
