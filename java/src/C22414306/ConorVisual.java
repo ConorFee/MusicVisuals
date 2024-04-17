@@ -3,7 +3,7 @@ package C22414306;
 import ddf.minim.AudioPlayer;
 import ie.tudublin.*;
 
-public class MyVisual1 extends Visual
+public class ConorVisual extends Visual
 {
 
     private AudioPlayer ap;
