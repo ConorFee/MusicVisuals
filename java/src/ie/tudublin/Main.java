@@ -1,14 +1,9 @@
 package ie.tudublin;
 
-import example.MyVisual;
-
-/* 
-import example.AudioBandsVisual;
 import example.CubeVisual;
 import example.MyVisual;
-import C22414306.*;
 import example.RotatingAudioBands;
-*/
+
 public class Main  {
     
     public void startUI() 
