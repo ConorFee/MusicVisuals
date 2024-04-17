@@ -1,7 +1,7 @@
 package C22470414;
 
 
-public class Main
+public class main
 {
 
 	public void helloProcessing()
@@ -15,7 +15,7 @@ public class Main
 		System.out.println("STAYINNIT");
 		
 		
-		Main m = new Main();
+		main m = new main();
 	
 
 		m.helloProcessing();
