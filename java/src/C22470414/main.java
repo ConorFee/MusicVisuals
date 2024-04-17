@@ -7,12 +7,12 @@ public class Main
 	public void helloProcessing()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Sound());
+        processing.core.PApplet.runSketch( a, new Visual());
     }
 	
 	public static void main(String[] args)
 	{
-		System.out.println("Hello world");
+		System.out.println("STAYINNIT");
 		
 		
 		Main m = new Main();
