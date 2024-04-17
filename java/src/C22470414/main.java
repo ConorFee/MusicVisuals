@@ -7,7 +7,7 @@ public class Main
 	public void helloProcessing()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Visual());
+        processing.core.PApplet.runSketch( a, new test());
     }
 	
 	public static void main(String[] args)
