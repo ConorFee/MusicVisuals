@@ -4,6 +4,17 @@
             "type": "java",
             "name": "Main",
             "request": "launch",
+<<<<<<< HEAD
+            "mainClass": "C22493266.Main",
+=======
+            "mainClass": "C22470414.Main",
+>>>>>>> f0a946fcef148fca10beb9cbcfc5cff14f34c74f
+            "projectName": "java"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
             "mainClass": "C22414306.Main",
             "projectName": "java"
         },
