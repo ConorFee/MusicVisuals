@@ -7,10 +7,10 @@ public class main
 	public void helloProcessing()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new test());
+        processing.core.PApplet.runSketch( a, new Visual());
     }
 	
-	public static void main(String[] args)
+	public static void Main(String[] args)
 	{
 		System.out.println("STAYINNIT");
 		
@@ -22,5 +22,6 @@ public class main
 	}
 	
 }
+
 
 
