@@ -174,17 +174,7 @@ public class test extends PApplet {
     public static void main(String[] args) {
         PApplet.main("C22470414.test");
     }
-}
-
-
-
-
-
-
-
-
-
-
+} 
 
 
 
