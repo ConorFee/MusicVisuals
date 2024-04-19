@@ -32,9 +32,6 @@ public class ConorVisual extends Visual
         
     }
 
-    public void draw() 
-    {
-        
-    }
+   
 
 }
