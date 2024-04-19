@@ -4,10 +4,10 @@ package C22470414;
 public class main
 {
 
-	public void helloProcessing()
+	public void processing()
 	{
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, new Visual());
+        processing.core.PApplet.runSketch( a, new test());
     }
 	
 	public static void Main(String[] args)
@@ -18,7 +18,7 @@ public class main
 		main m = new main();
 	
 
-		m.helloProcessing();
+		m.processing();
 	}
 	
 }
