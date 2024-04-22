@@ -14,21 +14,18 @@ public class JVisual extends PApplet {
     
     AudioBuffer b;
 
-    float circleSize;
+    float circleSize;       //put circlesize up here as i was having trouble accessing it in the clouds function
 
     @Override
     public void settings() {
-        // Set the size of the window
-        size(800, 600);            //adding p3d allows for 3d render  : 1500,1000,P3D
+        size(800, 600);             //window size
     }
 
     @Override
     public void setup() {
-        // Setup code goes here
         m = new Minim(this);
-        //ai = m.getLineIn(Minim.MONO, width, 44100, 16);
         ap = m.loadFile("stayinit.mp3");
-        //ap = m.loadFile("stayinit.mp3");
+        //ai = m.getLineIn(Minim.MONO, width, 44100, 16);
 
         ap.play();
         b = ap.mix;
@@ -46,15 +43,15 @@ public class JVisual extends PApplet {
              
 
 
-             float avg = 0;
+             float avg = 0; 
              
              for (int i = 0; i < b.size(); i++){
 
-                avg += abs(b.get(i));
+                avg += abs(b.get(i));   
 
              }
 
-             avg /= b.size();
+             avg /= b.size();       //average creation complete at this point, measured sound
 
              circleSize = map((avg),0,1,50,300); //size rangeees
 
@@ -67,6 +64,7 @@ public class JVisual extends PApplet {
 
              // going to attempt to make similar lines to this        https://www.youtube.com/watch?v=E9SD8M_awps
             
+
 
              stroke(hue,255,255);
              int numLines = 199;
@@ -88,7 +86,7 @@ public class JVisual extends PApplet {
             noFill();
             for (int i = y; i <= y + h; i++) {
                 float inter = map(i, y, y + h, 0, 1);
-                int c = lerpColor(c1, c2, inter);
+                int c = lerpColor(c1, c2, inter);       //mix the two colours together
                 stroke(c);
                 line(x, i, x + w, i);
             }
@@ -101,7 +99,7 @@ public class JVisual extends PApplet {
         public void clouds() {
             fill(255);
             noStroke();
-            int DECRET = 30;
+            int DECRET = 30;            // variable i use to decrease the size of the clouds/cirlces as it uses the same sizing as the sun
 
             //top left clouds
             ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
