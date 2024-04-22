@@ -45,20 +45,23 @@ public class JVisual extends PApplet {
              
              setGradient(0, 0, width, height, color(137, 255, 180), color(137, 255, 255)); // fades from light to darker blue sky
 
-             drawMountainsShadow();
-             drawMountains();
+             float avg = 0; 
+             for (int i = 0; i < b.size(); i++){                //avg moved up here so it can be passed into later functions
+                avg += abs(b.get(i));   
+             }
+             avg /= b.size();      
+
+
+             drawMountainsShadow(avg);
+             drawMountains(avg);
              drawFields();
-             drawCow();
+             drawCow(avg);
              cloudShadow();
              clouds();
              
 
 
-             float avg = 0; 
-             for (int i = 0; i < b.size(); i++){
-                avg += abs(b.get(i));   
-             }
-             avg /= b.size();                                           //average creation complete at this point, measured sound
+                                                        //average creation complete at this point, measured sound
              circleSize = map(avg,0,1,50,300);                          //size rangeees
 
 
@@ -113,28 +116,29 @@ public class JVisual extends PApplet {
 
 
 
-         private void drawMountains() {
-            fill(169, 169, 169); // Dark grey
+         private void drawMountains(float avg) {
+            fill(0, 30, 100); // Dark grey
             beginShape(TRIANGLES);
+            float mountainHeightFactor = map(avg, 0, 1, 30, 80); // Dynamic height factor
             for (int i = 0; i < width; i += 30) { // 30 px spacing
                 vertex(i, height * 0.7f); // start base point 
-                vertex(i + 25, height * 0.5f - random(40)); // 
+                vertex(i + 25, height * 0.5f - random(mountainHeightFactor)); // Middle point with dynamic height
                 vertex(i + 50, height * 0.7f); // End point at base
             }
             endShape();
         }
-
-
-        private void drawMountainsShadow() {
+        
+        private void drawMountainsShadow(float avg) {
             beginShape(TRIANGLES);
-        for (int i = 0; i < width; i += 30) {
-            float hue = random(255);  // Random hue for each mountain segment
-            fill(hue, 255, 255);  // Bright random color
-            vertex(i, height * 0.7f);
-            vertex(i + 25, height * 0.5f - random(60));
-            vertex(i + 50, height * 0.6f);
-        }
-        endShape();
+            float shadowHeightFactor = map(avg, 0, 1, 40, 100); // More variation in shadow
+            for (int i = 0; i < width; i += 30) {
+                float hue = map(avg, 0, 1, 00, 255);  // Dynamic hue based on avg
+                fill(hue, 255, 255);  // Bright random color based on music
+                vertex(i, height * 0.7f);
+                vertex(i + 25, height * 0.5f - random(shadowHeightFactor));
+                vertex(i + 50, height * 0.6f);
+            }
+            endShape();
         }
 
         public void clouds() {
@@ -155,27 +159,27 @@ public class JVisual extends PApplet {
 
 
             //top left clouds
-            ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
-            ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
-            ellipse(100, 100, circleSize-DECRET, circleSize-DECRET);
-            ellipse(105, 95, circleSize-DECRET, circleSize-DECRET);
-            ellipse(110, 100, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
+           // ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(100, 100, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(105, 95, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(110, 100, circleSize-DECRET, circleSize-DECRET);
 
             //top right 
 
-            ellipse(630, 120, circleSize-DECRET, circleSize-DECRET);
-            ellipse(620, 110, circleSize-DECRET, circleSize-DECRET);
-            ellipse(600, 120, circleSize-DECRET, circleSize-DECRET);
-            ellipse(605, 115, circleSize-DECRET, circleSize-DECRET);
-            ellipse(610, 120, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(630, 120, circleSize-DECRET, circleSize-DECRET);
+           // ellipse(620, 110, circleSize-DECRET, circleSize-DECRET);
+           /// ellipse(600, 120, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(605, 115, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(610, 120, circleSize-DECRET, circleSize-DECRET);
 
 
             // mid
-            ellipse(430, 80, circleSize-DECRET, circleSize-DECRET);
-            ellipse(420, 70, circleSize-DECRET, circleSize-DECRET);
-            ellipse(400, 80, circleSize-DECRET, circleSize-DECRET);
-            ellipse(405, 75, circleSize-DECRET, circleSize-DECRET);
-            ellipse(410, 80, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(430, 80, circleSize-DECRET, circleSize-DECRET);
+           // ellipse(420, 70, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(400, 80, circleSize-DECRET, circleSize-DECRET);
+            ///ellipse(405, 75, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(410, 80, circleSize-DECRET, circleSize-DECRET);
 
 
         }
@@ -204,71 +208,68 @@ public class JVisual extends PApplet {
 
 
             //top left clouds
-            ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
-            ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
-            ellipse(100, 100, circleSize-DECRET, circleSize-DECRET);
-            ellipse(105, 95, circleSize-DECRET, circleSize-DECRET);
-            ellipse(110, 100, circleSize-DECRET, circleSize-DECRET);
+           // ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
+           // ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
+           // ellipse(100, 100, circleSize-DECRET, circleSize-DECRET);
+           // ellipse(105, 95, circleSize-DECRET, circleSize-DECRET);
+           // ellipse(110, 100, circleSize-DECRET, circleSize-DECRET);
 
             //top right 
 
-            ellipse(630, 120, circleSize-DECRET, circleSize-DECRET);
-            ellipse(620, 110, circleSize-DECRET, circleSize-DECRET);
-            ellipse(600, 120, circleSize-DECRET, circleSize-DECRET);
-            ellipse(605, 115, circleSize-DECRET, circleSize-DECRET);
-            ellipse(610, 120, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(630, 120, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(620, 110, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(600, 120, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(605, 115, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(610, 120, circleSize-DECRET, circleSize-DECRET);
 
             // mid
-            ellipse(430, 80, circleSize-DECRET, circleSize-DECRET);
-            ellipse(420, 70, circleSize-DECRET, circleSize-DECRET);
-            ellipse(400, 80, circleSize-DECRET, circleSize-DECRET);
-            ellipse(405, 75, circleSize-DECRET, circleSize-DECRET);
-            ellipse(410, 80, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(430, 80, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(420, 70, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(400, 80, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(405, 75, circleSize-DECRET, circleSize-DECRET);
+            //ellipse(410, 80, circleSize-DECRET, circleSize-DECRET);
 
 
         }
 
-        private void drawCow() {
-            float cowX = width * 0.5f; 
-            float cowY = height * 0.9f; 
-            
+        private void drawCow(float avg) {
+            float cowX = width * 0.5f;
+            float cowY = height * 0.9f;
+        
             // Body
-            fill(255);
-            ellipse(cowX, cowY, 100, 150); 
+            fill(255); // White cow
+            ellipse(cowX, cowY, 100, 150); // Main body
             
             // Ears
-            fill(255);
-            ellipse(cowX - 22, cowY - 100, 20, 20); 
-            ellipse(cowX + 22, cowY - 100, 20, 20);
+            fill(255); // White ears
+            ellipse(cowX - 22, cowY - 100, 20, 20); // Left ear
+            ellipse(cowX + 22, cowY - 100, 20, 20); // Right ear
             
             // Head
-            ellipse(cowX, cowY-60, 65, 85);
+            ellipse(cowX, cowY - 60, 65, 85); // Head
             
-            // eyes
-            float hue = random(255);
-            fill(hue, 255,255);
-            ellipse(cowX - 20, cowY - 70, 30, 30); 
+            // Eyes
+            float hue = map(avg, 0, 1, 0, 255);
+            fill(hue, 255, 255);
+            ellipse(cowX - 20, cowY - 70, 30, 30);
             ellipse(cowX + 20, cowY - 70, 30, 30);
             fill(0);
-            ellipse(cowX - 20, cowY - 70, 30, 9); 
-            ellipse(cowX + 20, cowY - 70, 30, 9); 
+            ellipse(cowX - 20, cowY - 70, 30, 9);
+            ellipse(cowX + 20, cowY - 70, 30, 9);
             
-            
-            // arms
-            fill(0);
+            // Legs and spots
+            fill(0); // Black legs and spots
             rect(cowX - 45, cowY + 30, 15, 40);
-            rect(cowX + 30, cowY + 30, 15, 40); 
-            
-            // Spots
-            ellipse(cowX - 10, cowY, 20, 15); 
+            rect(cowX + 30, cowY + 30, 15, 40);
+            ellipse(cowX - 10, cowY, 20, 15);
             ellipse(cowX + 20, cowY + 10, 25, 20);
             
             // Tail
-            stroke(0); 
+            stroke(0); // Black tail
             line(cowX + 50, cowY, cowX + 70, cowY - 20);
             fill(0);
-            ellipse(cowX + 70, cowY - 20, 10, 10); 
-            noStroke(); 
+            ellipse(cowX + 70, cowY - 20, 10, 10);
+            noStroke(); // Reset no stroke
         }
 
 
