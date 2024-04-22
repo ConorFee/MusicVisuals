@@ -47,10 +47,17 @@ public class ConorVisual extends Visual
 
     public void setup()
     {
-        startMinim();
-        loadAudio("stayinit.mp3");
+        
+        minim = new Minim(this);
+        ap = minim.loadFile("stayinit.mp3", 1024);
+        ap.play();
+        ab = ap.mix;
+        colorMode(HSB);
 
-        startListening();
+        y = height / 2;
+        smoothedY = y;
+
+        lerpedBuffer = new float[width];
         
     }
 
