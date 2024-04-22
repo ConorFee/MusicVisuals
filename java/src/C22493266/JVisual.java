@@ -90,7 +90,21 @@ public class JVisual extends PApplet {
              ellipse(width / 2, height / 2, circleSize, circleSize);
 
              // going to attempt to make similar lines to this        https://www.youtube.com/watch?v=E9SD8M_awps
+            
 
+             stroke(hue,255,255);
+             int numLines = 600;
+             float angles =  TWO_PI / numLines;
+             for (int i = 0; i < numLines; i++) {
+                float lineLength = map(b.get(i % b.size()), -1, 1,0,150);       //https://processing.org/examples/sinecosine.html
+                float x1 = width/2 + cos(angles * i) * (circleSize / 2) ;
+                float y1 = height/2 + sin(angles * i ) * (circleSize / 2 );
+                float x2 = width/2 + cos(angles * i) * (circleSize / 2 + lineLength) ;
+                float y2 = height/2 + sin(angles * i ) * (circleSize / 2 + lineLength);
+
+                line(x1,y1,x2,y2);
+
+             }
         }
     }
 
