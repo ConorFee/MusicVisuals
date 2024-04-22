@@ -54,15 +54,20 @@ public class JVisual extends PApplet {
             //fill(hue, 100, 255);
             //line(x, height - barHeight, barWidth, barHeight);
             */
+
+        
             float h = height /2;
             for(int i = 0; i < b.size() ; i++)
             {
                 float hue = map(i , 0, b.size(), 0 , 256);
                 stroke(hue, 255, 255);
-                line(i, h + b.get(i) * h, i , h+b.get(i) * h);
+                line(mouseX , mouseY, i , h+b.get(i) * h);
+                //line(i , h + b.get(i) * h, i , h+b.get(i) * h);
 
             }
-       
+            
+
+        
         }
     }
 
