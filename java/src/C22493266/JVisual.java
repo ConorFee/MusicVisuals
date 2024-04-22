@@ -14,6 +14,8 @@ public class JVisual extends PApplet {
     
     AudioBuffer b;
 
+    float circleSize;
+
     @Override
     public void settings() {
         // Set the size of the window
@@ -35,7 +37,15 @@ public class JVisual extends PApplet {
     @Override
     public void draw() {
 
-             background(137,255,240);
+             
+             setGradient(0, 0, width, height, color(137, 255, 150), color(137, 255, 240)); // fades from light to darker blue sky
+
+
+             cloudShadow();
+             clouds();
+             
+
+
              float avg = 0;
              
              for (int i = 0; i < b.size(); i++){
@@ -46,11 +56,11 @@ public class JVisual extends PApplet {
 
              avg /= b.size();
 
-             float circleSize = map((avg),0,1,50,300); //size rangeees
+             circleSize = map((avg),0,1,50,300); //size rangeees
 
 
              colorMode(HSB);
-             float hue = map(avg,0,1,20,200);
+             float hue = map(avg,0,1,30,200);
              fill(hue,255,255);
              noStroke();
              ellipse(width / 2, height / 2, circleSize, circleSize);
@@ -72,5 +82,83 @@ public class JVisual extends PApplet {
 
              }
         }
+
+
+        private void setGradient(int x, int y, float w, float h, int c1, int c2) {          //used for the fading sky, draws lines repeatedly, slightly changing colour as it increments
+            noFill();
+            for (int i = y; i <= y + h; i++) {
+                float inter = map(i, y, y + h, 0, 1);
+                int c = lerpColor(c1, c2, inter);
+                stroke(c);
+                line(x, i, x + w, i);
+            }
+        }
+
+
+
+
+
+        public void clouds() {
+            fill(255);
+            noStroke();
+            int DECRET = 30;
+
+            //top left clouds
+            ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
+            ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
+            ellipse(100, 100, circleSize-DECRET, circleSize-DECRET);
+            ellipse(105, 95, circleSize-DECRET, circleSize-DECRET);
+            ellipse(110, 100, circleSize-DECRET, circleSize-DECRET);
+
+            //top right 
+
+            ellipse(630, 120, circleSize-DECRET, circleSize-DECRET);
+            ellipse(620, 110, circleSize-DECRET, circleSize-DECRET);
+            ellipse(600, 120, circleSize-DECRET, circleSize-DECRET);
+            ellipse(605, 115, circleSize-DECRET, circleSize-DECRET);
+            ellipse(610, 120, circleSize-DECRET, circleSize-DECRET);
+
+
+            // mid
+            ellipse(430, 80, circleSize-DECRET, circleSize-DECRET);
+            ellipse(420, 70, circleSize-DECRET, circleSize-DECRET);
+            ellipse(400, 80, circleSize-DECRET, circleSize-DECRET);
+            ellipse(405, 75, circleSize-DECRET, circleSize-DECRET);
+            ellipse(410, 80, circleSize-DECRET, circleSize-DECRET);
+
+
+        }
+
+        public void cloudShadow() {
+            fill(0);
+            noStroke();
+            int DECRET = 20;
+
+            //top left clouds
+            ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
+            ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
+            ellipse(100, 100, circleSize-DECRET, circleSize-DECRET);
+            ellipse(105, 95, circleSize-DECRET, circleSize-DECRET);
+            ellipse(110, 100, circleSize-DECRET, circleSize-DECRET);
+
+            //top right 
+
+            ellipse(630, 120, circleSize-DECRET, circleSize-DECRET);
+            ellipse(620, 110, circleSize-DECRET, circleSize-DECRET);
+            ellipse(600, 120, circleSize-DECRET, circleSize-DECRET);
+            ellipse(605, 115, circleSize-DECRET, circleSize-DECRET);
+            ellipse(610, 120, circleSize-DECRET, circleSize-DECRET);
+
+            // mid
+            ellipse(430, 80, circleSize-DECRET, circleSize-DECRET);
+            ellipse(420, 70, circleSize-DECRET, circleSize-DECRET);
+            ellipse(400, 80, circleSize-DECRET, circleSize-DECRET);
+            ellipse(405, 75, circleSize-DECRET, circleSize-DECRET);
+            ellipse(410, 80, circleSize-DECRET, circleSize-DECRET);
+
+
+        }
+
+
     }
 
