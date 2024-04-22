@@ -95,7 +95,35 @@ public class ConorVisual extends Visual
         switch (mode) 
         {
             case 1:
+
+                background(0);
+                strokeWeight(2);
+            
+                // Calculate overall average value
+                float total1 = 0;
+
+                for(int i = 0; i < ab.size(); i++) 
+                {
+                    total1 += abs(ab.get(i));
+                }
                 
+                float overallAverage = total1 / (float) ab.size();
+                // Map average value to hue
+                //
+                float hue = map(overallAverage, 0, 1, 0, 360);
+                
+                float saturation = 255; 
+                float brightness = 255; 
+                // Set fill to none for the central circle
+                //
+                noFill();
+                // Set stroke color using HSB color mode
+                //
+                stroke(hue, saturation, brightness); 
+                float radius = overallAverage * halfH * 2;
+                // Draw central circle at the center of the canvas
+                //
+                ellipse(width/2, height/2, radius, radius);
 
                 break;
         
