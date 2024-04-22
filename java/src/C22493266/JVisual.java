@@ -17,7 +17,7 @@ public class JVisual extends PApplet {
     @Override
     public void settings() {
         // Set the size of the window
-        size(1500, 1000);            //adding p3d allows for 3d render  : 1500,1000,P3D
+        size(800, 800);            //adding p3d allows for 3d render  : 1500,1000,P3D
     }
 
     @Override
@@ -34,44 +34,63 @@ public class JVisual extends PApplet {
 
     @Override
     public void draw() {
+
+        /* 
         colorMode(HSB);
         //colorMode(RGB, 1500,100,255);
         background(0);
         stroke(255);
-        /* 
-        float barWidth = width / (float)b.size();
+         
+       
+            
 
-        for(int i = 0; i < b.size(); i++) {
-            float x = i * barWidth;
-            float barHeight = abs(b.get(i)) * height * 5;
-            float hue = map(i, 0, b.size(), 0, 256);
-
-            // Draw the shadow
-            fill(128, 178, 128, 100);// Black with low alpha for shadow effect
-            line(x + 20, height - barHeight + 5, barWidth, barHeight);
-
-            stroke(255);
-            // Draw the main bar
-            //fill(hue, 100, 255);
-            //line(x, height - barHeight, barWidth, barHeight);
-            */
-
-        
+             
             float h = height /2;
             for(int i = 0; i < b.size() ; i++)
             {
                 float hue = map( i , 0, b.size(), 0 , 130);
-                stroke(mouseX, 255, 255);
-                //stroke(hue, 255, 255);
+                //stroke(mouseX, 255, 255);
+                stroke(hue, 255, 255);
                 //fill(255, 100, 200, 25);
                 //fill(mouseX, 100, mouseY, 25);
                 //line(mouseX , mouseY, i , h+b.get(i) * h);
                 line(i , h + b.get(i) * h, i , h+b.get(i) * h);
-
+                line(i, h, i, h + b.get(i) * 100); // 100 is a scaling factor for visualization
             }
             
+            float h = height / 2;
+            float w = width / (float) b.size(); // calculates circle spacing
+            
+            for (int i = 0; i < b.size(); i++) {
+                float diameter = abs(b.get(i)) * 200;  // Scale the diameter based on audio level
+                float hue = map(i, 0, b.size(), 0, 255);
+                fill(hue, 255, 255);
+                noStroke();  // Disable stroke for a cleaner look of circles
+                ellipse(w * i + w / 2, h, diameter, diameter);  // Draw the circle centered in its segment
+             } */
 
-        
+             background(0);
+             float avg = 0;
+             
+             for (int i = 0; i < b.size(); i++){
+
+                avg += abs(b.get(i));
+
+             }
+
+             avg /= b.size();
+
+             float circleSize = map((avg+1),0,1,50,300); //size rangeees
+
+
+             colorMode(HSB);
+             float hue = map(avg,0,1,0,255);
+             fill(hue,255,255);
+             noStroke();
+             ellipse(width / 2, height / 2, circleSize, circleSize);
+
+
+
         }
     }
 
