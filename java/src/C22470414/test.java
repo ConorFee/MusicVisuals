@@ -22,7 +22,7 @@ public class test extends PApplet {
     float secondaryThickness; // Thickness of the secondary X shape
     int colorChangeSpeed = 5; // Speed of color change
     int colorOffset = 0; // Offset for color change
-    float lastSecondaryXSize, lastSecondaryYSize; // Store previous secondary X shape size
+    float lastSecondaryXSize, lastSecondaryYSize; // Store previouS secondary X shape size
 
     @Override
     public void settings() {
