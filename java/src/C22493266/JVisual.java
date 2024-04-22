@@ -89,7 +89,7 @@ public class JVisual extends PApplet {
              noStroke();
              ellipse(width / 2, height / 2, circleSize, circleSize);
 
-
+             // going to attempt to make similar lines to this        https://www.youtube.com/watch?v=E9SD8M_awps
 
         }
     }
