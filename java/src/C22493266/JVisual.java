@@ -8,7 +8,7 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PVector;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 public class JVisual extends PApplet {
 
@@ -17,14 +17,14 @@ public class JVisual extends PApplet {
     AudioPlayer ap;
     AudioBuffer b;
 
-    float circleSize;       //put circlesize up here as i was having trouble accessing it in the clouds function
+    float circleSize;                                           //put circlesize up here as i was having trouble accessing it in the clouds function
 
-    ArrayList<PVector> cloudPostions;       // this list stores clicked locations for clouds
+    ArrayList<PVector> cloudPostions;                           // this list stores clicked locations for clouds
 
 
     @Override
     public void settings() {
-        size(800, 600);             //window size
+        size(800, 600);                                         //window size
     }
 
     @Override
@@ -35,7 +35,7 @@ public class JVisual extends PApplet {
         ap.play();
         b = ap.mix;
 
-        cloudPostions = new ArrayList<>(); //initialize list
+        cloudPostions = new ArrayList<>();                      //initialize list
 
     }
 
@@ -45,9 +45,10 @@ public class JVisual extends PApplet {
              
              setGradient(0, 0, width, height, color(137, 255, 180), color(137, 255, 255)); // fades from light to darker blue sky
 
-
-
+             drawMountainsShadow();
+             drawMountains();
              drawFields();
+             drawCow();
              cloudShadow();
              clouds();
              
@@ -57,8 +58,8 @@ public class JVisual extends PApplet {
              for (int i = 0; i < b.size(); i++){
                 avg += abs(b.get(i));   
              }
-             avg /= b.size();       //average creation complete at this point, measured sound
-             circleSize = map(avg,0,1,50,300); //size rangeees
+             avg /= b.size();                                           //average creation complete at this point, measured sound
+             circleSize = map(avg,0,1,50,300);                          //size rangeees
 
 
              colorMode(HSB);
@@ -69,16 +70,9 @@ public class JVisual extends PApplet {
 
              // going to attempt to make similar lines to this        https://www.youtube.com/watch?v=E9SD8M_awps
             
-
-
              stroke(hue,255,255);
-             int numLines = 20;
+             int numLines = 400;
              float angles =  TWO_PI / numLines;
-
-            
-             
-
-
 
 
              for (int i = 0; i < numLines; i++) {
@@ -114,10 +108,34 @@ public class JVisual extends PApplet {
 
         private void drawFields() {
             fill(84,179,199);
-            rect(0, height * 0.8f, width, height * 0.2f) ;
+            rect(0, height * 0.7f, width, height * 0.3f) ;
          }
 
 
+
+         private void drawMountains() {
+            fill(169, 169, 169); // Dark grey
+            beginShape(TRIANGLES);
+            for (int i = 0; i < width; i += 30) { // 30 px spacing
+                vertex(i, height * 0.7f); // start base point 
+                vertex(i + 25, height * 0.5f - random(40)); // 
+                vertex(i + 50, height * 0.7f); // End point at base
+            }
+            endShape();
+        }
+
+
+        private void drawMountainsShadow() {
+            beginShape(TRIANGLES);
+        for (int i = 0; i < width; i += 30) {
+            float hue = random(255);  // Random hue for each mountain segment
+            fill(hue, 255, 255);  // Bright random color
+            vertex(i, height * 0.7f);
+            vertex(i + 25, height * 0.5f - random(60));
+            vertex(i + 50, height * 0.6f);
+        }
+        endShape();
+        }
 
         public void clouds() {
             fill(255);
@@ -163,11 +181,13 @@ public class JVisual extends PApplet {
         }
 
         public void cloudShadow() {
-            fill(0);
+            //fill(0);
             noStroke();
             int DECRET = 20;
 
             for(PVector pos : cloudPostions){
+                float hue = random(255);
+                fill(hue, 255,255);
                 //ellipse(pos.x, pos.y, circleSize - DECRET, circleSize - DECRET);
                 //ellipse(pos.x + random(-20, 20), pos.y + random(-20, 20), circleSize - DECRET, circleSize - DECRET);
                 //ellipse(pos.x + random(-20, 20), pos.y + random(-20, 20), circleSize - DECRET, circleSize - DECRET);      //this was an attempt to randomize the shape of each cloud when clicked but it reset evey frames
@@ -206,6 +226,49 @@ public class JVisual extends PApplet {
             ellipse(410, 80, circleSize-DECRET, circleSize-DECRET);
 
 
+        }
+
+        private void drawCow() {
+            float cowX = width * 0.5f; 
+            float cowY = height * 0.9f; 
+            
+            // Body
+            fill(255);
+            ellipse(cowX, cowY, 100, 150); 
+            
+            // Ears
+            fill(255);
+            ellipse(cowX - 22, cowY - 100, 20, 20); 
+            ellipse(cowX + 22, cowY - 100, 20, 20);
+            
+            // Head
+            ellipse(cowX, cowY-60, 65, 85);
+            
+            // eyes
+            float hue = random(255);
+            fill(hue, 255,255);
+            ellipse(cowX - 20, cowY - 70, 30, 30); 
+            ellipse(cowX + 20, cowY - 70, 30, 30);
+            fill(0);
+            ellipse(cowX - 20, cowY - 70, 30, 9); 
+            ellipse(cowX + 20, cowY - 70, 30, 9); 
+            
+            
+            // arms
+            fill(0);
+            rect(cowX - 45, cowY + 30, 15, 40);
+            rect(cowX + 30, cowY + 30, 15, 40); 
+            
+            // Spots
+            ellipse(cowX - 10, cowY, 20, 15); 
+            ellipse(cowX + 20, cowY + 10, 25, 20);
+            
+            // Tail
+            stroke(0); 
+            line(cowX + 50, cowY, cowX + 70, cowY - 20);
+            fill(0);
+            ellipse(cowX + 70, cowY - 20, 10, 10); 
+            noStroke(); 
         }
 
 
