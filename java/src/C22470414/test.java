@@ -35,7 +35,7 @@ public class test extends PApplet {
         minim = new Minim(this);
 
         // Load audio file
-        player = minim.loadFile("stayinit.mp3", 1024);
+        player = minim.loadFile("stayinit.mp3");
         player.play();
 
         fft = new FFT(player.bufferSize(), player.sampleRate());
@@ -44,7 +44,7 @@ public class test extends PApplet {
         smoothedAmplitude = new float[fft.specSize()];
 
         // Set initial size of the primary X shape to fit the window
-        baseXSize = width / 12; // Start smaller
+        baseXSize = width / 12; // start size
         baseYSize = height / 12;
         minSize = width / 15; // Adjusted minimum size
         maxSize = width / 6; // Adjusted maximum size
@@ -53,13 +53,13 @@ public class test extends PApplet {
         thickness = 10; // Adjusted thickness
 
         // Set initial size of the secondary X shape
-        secondaryBaseXSize = baseXSize / 4; // Start smaller
+        secondaryBaseXSize = baseXSize / 4; // Start sszie
         secondaryBaseYSize = baseYSize / 4;
-        secondaryMinSize = baseXSize / 5; // Adjusted minimum size
-        secondaryMaxSize = baseXSize / 3; // Adjusted maximum size
+        secondaryMinSize = baseXSize / 5; //minimum size
+        secondaryMaxSize = baseXSize / 3; //maximum size
 
         // Set initial thickness of the secondary X shape
-        secondaryThickness = 5; // Adjusted thickness
+        secondaryThickness = 5; //thickness
 
         // Set background color to black
         background(0);
@@ -79,7 +79,7 @@ public class test extends PApplet {
         // Calculate maximum amplitude
         float maxAmplitude = max(smoothedAmplitude);
 
-        // Update primary X shape size based on the music amplitude
+        //primary X shape size based on the music amplitude
         xSize = map(maxAmplitude, 0, 1, minSize, maxSize);
         ySize = map(maxAmplitude, 0, 1, minSize, maxSize);
 
@@ -87,10 +87,10 @@ public class test extends PApplet {
         xSize = min(xSize, width / 2);
         ySize = min(ySize, height / 2);
 
-        // Update thickness of the primary X shape
+        //thickness of the primary X shape
         thickness = map(maxAmplitude, 0, 1, 5, 20); // Adjusted thickness
 
-        // Update secondary X shape size based on the primary X shape size
+        // secondary X shape size based on the primary X shape size
         secondaryXSize = map(maxAmplitude, 0, 1, secondaryMinSize, secondaryMaxSize);
         secondaryYSize = map(maxAmplitude, 0, 1, secondaryMinSize, secondaryMaxSize);
 
@@ -106,7 +106,7 @@ public class test extends PApplet {
         lastSecondaryXSize = secondaryXSize;
         lastSecondaryYSize = secondaryYSize;
 
-        // Update thickness of the secondary X shape
+        //thickness of the secondary X shape
         secondaryThickness = map(maxAmplitude, 0, 1, 2, 8); // Adjusted thickness
 
         // Draw primary X shape
@@ -119,7 +119,7 @@ public class test extends PApplet {
                         secondaryXSize / 2, secondaryYSize / 2, secondaryThickness);
         }
 
-        // Update color offset for primary X shape
+        //color offset for primary X shape
         colorOffset += colorChangeSpeed;
     }
 
