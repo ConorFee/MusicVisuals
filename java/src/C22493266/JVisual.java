@@ -49,19 +49,16 @@ public class JVisual extends PApplet {
              for (int i = 0; i < b.size(); i++){                //avg moved up here so it can be passed into later functions
                 avg += abs(b.get(i));   
              }
-             avg /= b.size();      
+             avg /= b.size();       //average creation complete at this point, measured sound
+             circleSize = map(avg,0,1,50,300);                          //size rangeees
 
 
              drawMountainsShadow(avg);
              drawMountains(avg);
              drawFields();
-             drawCow(avg);
+             drawCow(avg, circleSize);
              cloudShadow();
-             clouds();
-             
-
-
-                                                        //average creation complete at this point, measured sound
+             clouds();          
              circleSize = map(avg,0,1,50,300);                          //size rangeees
 
 
@@ -94,7 +91,7 @@ public class JVisual extends PApplet {
 
 
         public void mousePressed() {
-            cloudPostions.add(new PVector(mouseX,mouseY));  //add pos of mouse click
+            cloudPostions.add(new PVector(mouseX,mouseY));                                  //add pos of mouse click
         }
 
 
@@ -103,21 +100,21 @@ public class JVisual extends PApplet {
             noFill();
             for (int i = y; i <= y + h; i++) {
                 float inter = map(i, y, y + h, 0, 1);
-                int c = lerpColor(c1, c2, inter);       //mix the two colours together
+                int c = lerpColor(c1, c2, inter);                                           //mix the two colours together
                 stroke(c);
                 line(x, i, x + w, i);
             }
         }
 
         private void drawFields() {
-            fill(84,179,199);
+            fill(70,249,255);
             rect(0, height * 0.7f, width, height * 0.3f) ;
          }
 
 
 
          private void drawMountains(float avg) {
-            fill(0, 30, 100); // Dark grey
+            fill(255, 0, 100); // Dark grey
             beginShape(TRIANGLES);
             float mountainHeightFactor = map(avg, 0, 1, 30, 80); // Dynamic height factor
             for (int i = 0; i < width; i += 30) { // 30 px spacing
@@ -132,7 +129,7 @@ public class JVisual extends PApplet {
             beginShape(TRIANGLES);
             float shadowHeightFactor = map(avg, 0, 1, 40, 100); // More variation in shadow
             for (int i = 0; i < width; i += 30) {
-                float hue = map(avg, 0, 1, 00, 255);  // Dynamic hue based on avg
+                float hue = map(avg, 0, 1, 120, 255);  // Dynamic hue based on avg
                 fill(hue, 255, 255);  // Bright random color based on music
                 vertex(i, height * 0.7f);
                 vertex(i + 25, height * 0.5f - random(shadowHeightFactor));
@@ -190,8 +187,10 @@ public class JVisual extends PApplet {
             int DECRET = 20;
 
             for(PVector pos : cloudPostions){
-                float hue = random(255);
-                fill(hue, 255,255);
+                //float hue = random(255);
+                //fill(hue, 255,255);
+                fill(0);
+
                 //ellipse(pos.x, pos.y, circleSize - DECRET, circleSize - DECRET);
                 //ellipse(pos.x + random(-20, 20), pos.y + random(-20, 20), circleSize - DECRET, circleSize - DECRET);
                 //ellipse(pos.x + random(-20, 20), pos.y + random(-20, 20), circleSize - DECRET, circleSize - DECRET);      //this was an attempt to randomize the shape of each cloud when clicked but it reset evey frames
@@ -232,22 +231,26 @@ public class JVisual extends PApplet {
 
         }
 
-        private void drawCow(float avg) {
+        private void drawCow(float avg , float circleSize) {
             float cowX = width * 0.5f;
             float cowY = height * 0.9f;
         
             // Body
-            fill(255); // White cow
-            ellipse(cowX, cowY, 100, 150); // Main body
+            fill(255);
+            ellipse(cowX, cowY, 100, 150);
             
             // Ears
-            fill(255); // White ears
-            ellipse(cowX - 22, cowY - 100, 20, 20); // Left ear
-            ellipse(cowX + 22, cowY - 100, 20, 20); // Right ear
+            fill(255);
+            ellipse(cowX - 22, cowY - 100, 20, 20); 
+            ellipse(cowX + 22, cowY - 100, 20, 20); 
             
             // Head
-            ellipse(cowX, cowY - 60, 65, 85); // Head
+            ellipse(cowX, cowY - 60, 65, 85); 
             
+            //mouth
+            fill(0);
+            ellipse(cowX, cowY-29, circleSize/2, circleSize/4);
+
             // Eyes
             float hue = map(avg, 0, 1, 0, 255);
             fill(hue, 255, 255);
@@ -258,18 +261,18 @@ public class JVisual extends PApplet {
             ellipse(cowX + 20, cowY - 70, 30, 9);
             
             // Legs and spots
-            fill(0); // Black legs and spots
+            fill(0);
             rect(cowX - 45, cowY + 30, 15, 40);
             rect(cowX + 30, cowY + 30, 15, 40);
             ellipse(cowX - 10, cowY, 20, 15);
             ellipse(cowX + 20, cowY + 10, 25, 20);
             
             // Tail
-            stroke(0); // Black tail
+            stroke(0);
             line(cowX + 50, cowY, cowX + 70, cowY - 20);
             fill(0);
             ellipse(cowX + 70, cowY - 20, 10, 10);
-            noStroke(); // Reset no stroke
+            noStroke();
         }
 
 
