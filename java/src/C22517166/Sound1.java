@@ -1,5 +1,6 @@
 package C22517166;
 
+import ddf.minim.Minim;
 import ie.tudublin.Visual;
 
 public class Sound1 extends Visual
