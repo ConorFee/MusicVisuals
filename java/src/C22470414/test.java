@@ -149,7 +149,7 @@ public class test extends PApplet
             text("BY FRED AGAIN...", width / 2, height / 2 + 40);
              // Visuals by text animation
         if (millis() - startTime > 4000 && millis() - startTime < 6000) {
-            float t2 = map(millis() - startTime, 4000, 6000, 0, 1);
+            float t2 = map(millis() - startTime, 3500, 6000, 0, 1);
             textSize(24);
             textAlign(CENTER, TOP);
             float fade2 = map(sin(t2 * TWO_PI), -1, 1, 0, 255);
