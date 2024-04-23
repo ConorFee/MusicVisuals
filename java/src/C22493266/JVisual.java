@@ -19,7 +19,9 @@ public class JVisual extends PApplet {
 
     float circleSize;                                           //put circlesize up here as i was having trouble accessing it in the clouds function
 
-    ArrayList<PVector> cloudPostions;                           // this list stores clicked locations for clouds
+    ArrayList<PVector> cloudPostions;       // this list stores clicked locations for clouds
+    ArrayList<Smoke> smokes = new ArrayList<>();
+    int smokeTimer = 0;                                      
 
 
     @Override
@@ -57,6 +59,8 @@ public class JVisual extends PApplet {
              drawMountains(avg);
              drawFields();
              drawCow(avg, circleSize);
+             drawShroom(avg); 
+
              cloudShadow();
              clouds();          
              circleSize = map(avg,0,1,50,300);                          //size rangeees
@@ -65,7 +69,7 @@ public class JVisual extends PApplet {
              colorMode(HSB);
              float hue = map(avg,0,1,30,200);
              fill(hue,255,255);
-             noStroke();
+             //noStroke();
              ellipse(width / 2, height / 2, circleSize, circleSize);
 
              // going to attempt to make similar lines to this        https://www.youtube.com/watch?v=E9SD8M_awps
@@ -86,7 +90,26 @@ public class JVisual extends PApplet {
 
                 line(x1,y1,x2,y2);
 
+
+
              }
+             for (int i = smokes.size() - 1; i >= 0; i--) {
+                Smoke smoke = smokes.get(i);
+                smoke.update();
+                smoke.display();
+                if (smoke.isDead()) {
+                    smokes.remove(i);
+                }
+            }
+        
+            
+            if (smokeTimer % 50 == 0) {  // timing
+                float jointX = width * 0.5f + 50; 
+                float jointY = height * 0.9f - 29; 
+                smokes.add(new Smoke(jointX, jointY));
+            }
+            smokeTimer++;
+        
         }
 
 
@@ -114,23 +137,23 @@ public class JVisual extends PApplet {
 
 
          private void drawMountains(float avg) {
-            fill(255, 0, 100); // Dark grey
+            fill(255, 0, 100); 
             beginShape(TRIANGLES);
             float mountainHeightFactor = map(avg, 0, 1, 30, 80); // Dynamic height factor
             for (int i = 0; i < width; i += 30) { // 30 px spacing
                 vertex(i, height * 0.7f); // start base point 
-                vertex(i + 25, height * 0.5f - random(mountainHeightFactor)); // Middle point with dynamic height
-                vertex(i + 50, height * 0.7f); // End point at base
+                vertex(i + 25, height * 0.5f - random(mountainHeightFactor)); // mdddle point with dynamic height
+                vertex(i + 50, height * 0.7f); // end point at base
             }
             endShape();
         }
         
         private void drawMountainsShadow(float avg) {
             beginShape(TRIANGLES);
-            float shadowHeightFactor = map(avg, 0, 1, 40, 100); // More variation in shadow
+            float shadowHeightFactor = map(avg, 0, 1, 40, 100); // variation in shadow
             for (int i = 0; i < width; i += 30) {
-                float hue = map(avg, 0, 1, 120, 255);  // Dynamic hue based on avg
-                fill(hue, 255, 255);  // Bright random color based on music
+                float hue = map(avg, 0, 1, 120, 255);  
+                fill(hue, 255, 255);  
                 vertex(i, height * 0.7f);
                 vertex(i + 25, height * 0.5f - random(shadowHeightFactor));
                 vertex(i + 50, height * 0.6f);
@@ -143,7 +166,7 @@ public class JVisual extends PApplet {
             noStroke();
             int DECRET = 30;            // variable i use to decrease the size of the clouds/cirlces as it uses the same sizing as the sun
 
-            for(PVector pos : cloudPostions){
+            for(PVector pos : cloudPostions){                                         // places cloudcluster at every stored CoOrdinate in cloudpositoins
                 ellipse(pos.x, pos.y, circleSize - DECRET, circleSize - DECRET);
                 ellipse(pos.x - 20, pos.y + 0, circleSize - DECRET, circleSize - DECRET);
                 ellipse(pos.x + 5, pos.y - 5, circleSize - DECRET, circleSize - DECRET);
@@ -154,7 +177,7 @@ public class JVisual extends PApplet {
 
             }
 
-
+                                        //these are hard set clouds which I had originally
             //top left clouds
             //ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
            // ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
@@ -251,6 +274,13 @@ public class JVisual extends PApplet {
             fill(0);
             ellipse(cowX, cowY-29, circleSize/2, circleSize/4);
 
+            //joint
+            fill(9, 200, 100);  // Brown color for the joint
+            noStroke();
+            rect(cowX + 10, cowY - 29, 40, 6); 
+            fill(255,255,255);
+            ellipse(cowX + 50, cowY - 26, 6, 6);
+
             // Eyes
             float hue = map(avg, 0, 1, 0, 255);
             fill(hue, 255, 255);
@@ -273,8 +303,63 @@ public class JVisual extends PApplet {
             fill(0);
             ellipse(cowX + 70, cowY - 20, 10, 10);
             noStroke();
+
+
+        }
+
+        void drawShroom(float avg) {
+            float shroomX = 200; 
+            float shroomY = 500; 
+            
+            // stem of the mushroom
+            fill(255); 
+            rect(shroomX, shroomY, 14, 50);
+            
+            // shadow of the mushroom cap
+            float hue = map(avg, 0, 1, 00, 255); 
+            fill(hue, 255, 255);
+            arc(shroomX+8  , shroomY , 100, 60, PI, TWO_PI);
+            //actual cap
+            fill(00,255,255);
+            arc(shroomX+8  , shroomY , 80, 40, PI, TWO_PI);
+            
+            //spots
+            fill(255,0,255);
+
+            ellipse(shroomX,shroomY-20,10,10);
+            ellipse(shroomX-20,shroomY-7,10,10);
+            ellipse(shroomX+30,shroomY-15,10,10);
+            
         }
 
 
+
+        class Smoke {
+            PVector position;
+            float size;
+            float opacity;
+        
+            Smoke(float x, float y) {
+                position = new PVector(x, y);
+                size = random(5, 10); 
+                opacity = 255;  
+            }
+        
+            void update() {
+                position.y -= random(0.5F, 1.5F); // smoke rises
+                size *= 1.03; // smoke size increase
+                opacity -= 3; // smoke fade
+            }
+        
+            void display() {
+                noStroke();
+                fill(255, opacity);
+                ellipse(position.x, position.y, size, size);
+            }
+        
+            boolean isDead() {
+                return opacity <= 0 || size <= 0;
+            }
+        }
     }
 
