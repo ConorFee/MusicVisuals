@@ -32,7 +32,7 @@ public class JVisual extends PApplet {
     @Override
     public void setup() {
         m = new Minim(this);
-        ap = m.loadFile("stayinit.mp3");
+        //ap = m.loadFile("stayinit.mp3");
         //ai = m.getLineIn(Minim.MONO, width, 44100, 16);
         ap.play();
         b = ap.mix;
