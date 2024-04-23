@@ -129,7 +129,8 @@ public class test extends PApplet
     }
 
     void intro() {
-        if (millis() - startTime < 3000) {
+        if (millis() - startTime < 3000) 
+        {
             // STAYINIT text animation
             float t = map(millis() - startTime, 0, 3000, 0, 1);
             textSize(64);
@@ -137,9 +138,11 @@ public class test extends PApplet
             float fade = map(sin(t * TWO_PI), -1, 1, 0, 255);
             fill(255, 0, 0, fade);
             text("STAYINIT", width / 2, height / 2);
-        } else {
+        } 
+        else 
+        {
             // BY FRED AGAIN... text animation
-            float t = map(millis() - startTime, 3000, 6000, 0, 1);
+            float t = map(millis() - startTime, 2500, 6000, 0, 1);
             textSize(32);
             textAlign(CENTER, TOP);
             float fade = map(sin(t * TWO_PI), -1, 1, 0, 255);
@@ -148,8 +151,9 @@ public class test extends PApplet
             fill(255, 0, 0, fade);
             text("BY FRED AGAIN...", width / 2, height / 2 + 40);
              // Visuals by text animation
-        if (millis() - startTime > 4000 && millis() - startTime < 6000) {
-            float t2 = map(millis() - startTime, 3500, 6000, 0, 1);
+        if (millis() - startTime > 4000 && millis() - startTime < 6000) 
+        {
+            float t2 = map(millis() - startTime, 3000, 6000, 0, 1);
             textSize(24);
             textAlign(CENTER, TOP);
             float fade2 = map(sin(t2 * TWO_PI), -1, 1, 0, 255);
@@ -158,7 +162,8 @@ public class test extends PApplet
             fill(255, 0, 0, fade2);
             text("Visuals by Mark Langan, Conor Fee, Oisin Cruise, and Jake Walsh", width / 2, height / 2 + 70);
         }
-            if (millis() - startTime > 6000) {
+            if (millis() - startTime > 6000) 
+            {
                 introDone = true;
             }
         }
