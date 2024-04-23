@@ -20,6 +20,8 @@ public class test extends PApplet
     int colorChangeSpeed = 5; // Speed of color change
     int colorOffset = 0; // Offset for color change
     float lastSecondaryXSize, lastSecondaryYSize; // Store previouS secondary X shape size
+    boolean introDone = false;
+    int startTime;
 
     @Override
     public void settings() 
@@ -58,11 +60,17 @@ public class test extends PApplet
 
         // Set background color to black
         background(0);
+        startTime = millis();
     }
 
     @Override
     public void draw() 
     {
+        if(!introDone)
+        {
+            intro();
+        }
+        else{
         // Calculate spectrum
         fft.forward(player.mix);
 
@@ -96,8 +104,8 @@ public class test extends PApplet
         secondaryYSize = min(secondaryYSize, height / 2);
 
         //additional smoothing to secondary X shape size
-        secondaryXSize = lerp(lastSecondaryXSize, secondaryXSize, 0.05f); 
-        secondaryYSize = lerp(lastSecondaryYSize, secondaryYSize, 0.05f); 
+        secondaryXSize = lerp(lastSecondaryXSize, secondaryXSize, 0.02f); 
+        secondaryYSize = lerp(lastSecondaryYSize, secondaryYSize, 0.02f); 
 
         // Store current secondary X shape size for smoothing
         lastSecondaryXSize = secondaryXSize;
@@ -118,7 +126,43 @@ public class test extends PApplet
         //color offset for primary X shape
         colorOffset += colorChangeSpeed;
     }
+    }
 
+    void intro() {
+        if (millis() - startTime < 3000) {
+            // STAYINIT text animation
+            float t = map(millis() - startTime, 0, 3000, 0, 1);
+            textSize(64);
+            textAlign(CENTER, CENTER);
+            float fade = map(sin(t * TWO_PI), -1, 1, 0, 255);
+            fill(255, 0, 0, fade);
+            text("STAYINIT", width / 2, height / 2);
+        } else {
+            // BY FRED AGAIN... text animation
+            float t = map(millis() - startTime, 3000, 6000, 0, 1);
+            textSize(32);
+            textAlign(CENTER, TOP);
+            float fade = map(sin(t * TWO_PI), -1, 1, 0, 255);
+            fill(255);
+            text("BY FRED AGAIN...", width / 2, height / 2 + 40);
+            fill(255, 0, 0, fade);
+            text("BY FRED AGAIN...", width / 2, height / 2 + 40);
+             // Visuals by text animation
+        if (millis() - startTime > 4000 && millis() - startTime < 6000) {
+            float t2 = map(millis() - startTime, 4000, 6000, 0, 1);
+            textSize(24);
+            textAlign(CENTER, TOP);
+            float fade2 = map(sin(t2 * TWO_PI), -1, 1, 0, 255);
+            fill(255);
+            text("Visuals by Mark Langan, Conor Fee, Oisin Cruise, and Jake Walsh", width / 2, height / 2 + 70);
+            fill(255, 0, 0, fade2);
+            text("Visuals by Mark Langan, Conor Fee, Oisin Cruise, and Jake Walsh", width / 2, height / 2 + 70);
+        }
+            if (millis() - startTime > 6000) {
+                introDone = true;
+            }
+        }
+    }
     // Method to draw X shape
     void drawXShape(float x1, float y1, float x2, float y2, float thickness) 
     {
