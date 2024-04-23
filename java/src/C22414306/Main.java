@@ -1,4 +1,3 @@
-// File: Main.java
 package C22414306;
 
 public class Main {

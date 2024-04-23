@@ -52,7 +52,7 @@ public class ConorVisual extends Visual
         // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
         // ab = ai.mix; 
         
-        ap = minim.loadFile("stayinit.mp3", 1024);
+        ap = minim.loadFile("heartless.mp3", 1024);
         ap.play();
         ab = ap.mix;
         colorMode(HSB);
