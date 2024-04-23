@@ -1,217 +1,116 @@
 package C22517166;
 
+import ddf.minim.Minim;
 import ie.tudublin.Visual;
+import ddf.minim.AudioBuffer;
+import ddf.minim.AudioPlayer;
+import ddf.minim.analysis.FFT;
+import processing.core.PVector;
+import processing.core.PFont;
 
-public class Sound1 extends Visual
-{
-    boolean moreCubes = false;
+public class Sound1 extends Visual {
+    Minim minim;
+    AudioPlayer ap;
+    AudioBuffer ab;
+    FFT fft;
 
-    public void settings()
-    {
-        size(800, 800, P3D);
-        println("CWD: " + System.getProperty("user.dir"));
+    int cols, rows;
+    int scale = 20;
+    int w = 2000;
+    int h = 1600;
+
+    float[][] terrain;
+    float flying = 0;
+    PVector currentColor, targetColor;
+    int colorChangeFrames = 120;
+    int frameCounter;
+
+    PFont font;
+    float angle = 0;
+
+    public void settings() {
+        size(1200, 1200, P3D);
     }
 
-    public void keyPressed()
-    {
-        if (key == ' ')
-        {
-            getAudioPlayer().cue(0);
-            getAudioPlayer().play();
-        }
-        if (key == '1')
-        {
-            moreCubes = ! moreCubes;
+    public void keyPressed() {
+        if (key == ' ') {
+            ap.cue(0);
+            ap.play();
         }
     }
 
-   public void setup()
-   {
-       minim = new Minim(this);
-       // Uncomment this to use the microphone
-       // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
-       // ab = ai.mix; 
-       ap = minim.loadFile("stayinit.mp3", 1024);
-       ap.play();
-       ab = ap.mix;
-       colorMode(HSB);
+    public void setup() {
+        colorMode(HSB, 360, 100, 100);
+        cols = w / scale;
+        rows = h / scale;
+        terrain = new float[cols][rows];
+        minim = new Minim(this);
+        ap = minim.loadFile("stayinit.mp3", 1024);
+        ab = ap.mix;
+        fft = new FFT(ap.bufferSize(), ap.sampleRate());
+        ap.play();
 
-       y = height / 2;
-       smoothedY = y;
+        currentColor = new PVector(random(360), 100, 100);
+        targetColor = new PVector(random(360), 100, 100);
+        frameCounter = 0;
 
-       lerpedBuffer = new float[width];
-   }
+        font = createFont("Arial", 48, true);
+        textFont(font);
+    }
 
-   float off = 0;
-   float smoothedAverage = 0;
-   float x = 0;
+    public void draw() {
+        flying -= 0.1f;
+        float yoffset = flying;
+        float maxAmp = 0;
 
-   public void draw()
-   {
-       background(0);
-       float halfH = height / 2;
-       float average = 0;
-       float sum = 0;
-       off += 1;
-       // Calculate sum and average of the samples
-       // Also lerp each element of buffer;
-       for(int i = 0 ; i < ab.size() ; i ++)
-       {
-           sum += abs(ab.get(i));
-           lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.05f);
-       }
-       
-       average= sum / (float) ab.size();
+        for (int i = 0; i < ab.size(); i++) {
+            maxAmp = max(ab.get(i), maxAmp);
+        }
 
-       smoothedAmplitude = lerp(smoothedAmplitude, average, 0.1f);
-       
-       float cx = width / 2;
-       float cy = height / 2;
+        for (int y = 0; y < rows; y++) {
+            float xoffset = 0;
+            for (int x = 0; x < cols; x++) {
+                float baseHeight = map(noise(xoffset, yoffset), 0, 1, -120, 120);
+                terrain[x][y] = baseHeight + (maxAmp * 300);
+                xoffset += 0.2f;
+            }
+            yoffset += 0.2f;
+        }
 
-       switch (mode)
-       {
-           case 0:
+        if (frameCounter++ >= colorChangeFrames) {
+            frameCounter = 0;
+            currentColor.set(targetColor.x, targetColor.y, targetColor.z);
+            targetColor.set(random(360), 100, 100);
+        }
 
-               background(0);
-               strokeWeight(2);
+        currentColor.lerp(targetColor, 1.0f / colorChangeFrames);
+        background(currentColor.x, currentColor.y, currentColor.z);
 
-               for(int i = 0 ; i < ab.size() ; i ++)
-               {
-                   float c = map(i, 0, ab.size(), 0, 255);
-                   stroke(c, 255, 255);
-                   lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-                   float s = lerpedBuffer[i] * halfH;
-                   line(i, halfH - s, halfH + s, i);
-               }
-               
-               float total = 0;
+        translate(width / 2, height / 2, -50); // Adjust the z-coordinate to bring the text in front
+        rotateX(PI / 3);
+        translate(-w / 2, -h / 2);
 
-               for(int i = 0 ; i < ab.size() ; i ++)
-               {
-                   total += abs(ab.get(i));
-               }
-               
-               average = total / (float) ab.size();
-               lerpedAverage = lerp(lerpedAverage, average, 0.1f);
-               
-               break;
+        for (int y = 0; y < rows - 1; y++) {
+            beginShape(TRIANGLE_STRIP);
+            for (int x = 0; x < cols; x++) {
+                float z = terrain[x][y];
+                float z1 = terrain[x][y + 1];
+                fill(random(360), 100, 100);
+                stroke(random(360), 100, 80);
+                strokeWeight(2);
+                vertex(x * scale, y * scale, z);
+                vertex(x * scale, (y + 1) * scale, z1);
+            }
+            endShape();
+        }
 
-           case 1:
+        pushMatrix();
+        translate(width / 2, height / 2 + 150, 50); // Center the text and move it forward
+        rotateY(angle); // Rotate around the y-axis
+        fill(0, 0, 100); // High visibility white color
+        text("stayinit", -textWidth("stayinit") / 2, 0);
+        popMatrix();
 
-               background(0);
-               stroke(255);
-               for (int i = 0; i < ab.size(); i ++) 
-               {
-                   float c = map(i, 0, ab.size(), 0, 255); 
-                   stroke(c, 255, 255);
-                   float sample = ab.get(i) * (height / 2); 
-                   line(i, height / 2 - sample, i, (height / 2) + sample); 
-                   
-                   sum += abs(ab.get(i)); 
-               }
-
-               average = sum / ab.size();
-               smoothedAverage = lerp(off, average * 400, 0.1f);
-               break;
-           
-           case 2:
-           
-               for (int i = 0; i < ab.size(); i ++)
-               {
-                   float sample = ab.get(i) * halfH;
-                   stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
-                   //line(i, halfH + sample, i, halfH - sample); 
-               
-                   lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-               
-                   sample = lerpedBuffer[i] * width * 2;    
-                   stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
-                   line(0, i, sample, i); 
-                   line(width, i, width - sample, i); 
-                   line(i, 0, i, sample); 
-                   line(i, height, i, height - sample);
-               }
-               break;
-
-           case 3:
-           
-               float sum3 = 0;
-
-               // Calculate sum of absolute values of audio samples
-               //
-               for (int i = 0; i < ab.size(); i++) {
-                   sum3 += abs(ab.get(i));
-               }
-           
-               // Calculate average of absolute values
-               //
-               average = sum3 / ab.size();
-           
-               // Apply lerping for smoothing
-               //
-               lerpedAverage = lerp(lerpedAverage, average, 0.1f);
-           
-               // Map lerpedAverage to color and draw a colored circle
-               //
-               noStroke();
-               fill(map(lerpedAverage, 0, 1, 0, 255), 255, 255);
-               float circleSize = lerpedAverage * 1500; // Adjust the multiplier for size
-               ellipse(width / 2, height / 2, circleSize, circleSize);
-               break;
-
-           
-           case 4:
-               
-               float sum4= 0;
-
-               // Calculate sum of absolute values of audio samples
-               //
-               for (int i = 0; i < ab.size(); i++) {
-                   sum4 += abs(ab.get(i));
-               }
-           
-               // Calculate average of absolute values
-               //
-               average = sum4 / ab.size();
-           
-               // Apply lerping for smoothing
-               //
-               lerpedAverage = lerp(lerpedAverage, average, 0.1f);
-           
-               // Map lerpedAverage to color and draw a colored square
-               //
-               noStroke();
-               fill(map(lerpedAverage, 0, 1, 0, 255), 255, 255);
-               float squareSize = lerpedAverage * 1500; // Adjust the multiplier for size
-               rectMode(CENTER);
-               rect(width / 2, height / 2, squareSize, squareSize);
-               break;
-           
-           case 5:
-
-               break;
-               
-           
-           
-       }
-       
-
-
-       
-       // Other examples we made in the class
-       /*
-       stroke(255);
-       fill(100, 255, 255);        
-       
-       circle(width / 2, halfH, lerpedA * 100);
-
-       circle(100, y, 50);
-       y += random(-10, 10);
-       smoothedY = lerp(smoothedY, y, 0.1f);        
-       circle(200, smoothedY, 50);
-       */
-
-   }        
+        angle += 0.05;
+    }
 }
-
-

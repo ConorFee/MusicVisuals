@@ -4,7 +4,7 @@ import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
-import ie.tudublin.*;
+import ie.tudublin.Visual;
 
 public class ConorVisual extends Visual
 {
@@ -22,10 +22,9 @@ public class ConorVisual extends Visual
     float smoothedY = 0;
     float smoothedAmplitude = 0;
 
-
     public void keyPressed() 
     {
-        if (key >= '0' && key <= '9')
+		if (key >= '0' && key <= '9')
         {
 			mode = key - '0';
 		}
@@ -43,13 +42,17 @@ public class ConorVisual extends Visual
     public void settings()
     {
         size(1024, 1000, P3D);
+        //fullScreen(P3D, SPAN);
     }
 
     public void setup()
     {
-
         minim = new Minim(this);
-        ap = minim.loadFile("stayinit.mp3", 1024);
+        // Uncomment this to use the microphone
+        // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
+        // ab = ai.mix; 
+        
+        ap = minim.loadFile("heartless.mp3", 1024);
         ap.play();
         ab = ap.mix;
         colorMode(HSB);
@@ -58,43 +61,38 @@ public class ConorVisual extends Visual
         smoothedY = y;
 
         lerpedBuffer = new float[width];
-        
     }
 
     float off = 0;
     float smoothedAverage = 0;
     float x = 0;
 
-   public void draw()
-   {
-        // set colour to black
-        //
+    public void draw()
+    {
+
         background(0);
         float halfH = height / 2;
         float average = 0;
         float sum = 0;
         off += 1;
-        // loop through each sample in the audio buffer
-        //
+        // Calculate sum and average of the samples
+        // Also lerp each element of buffer;
         for(int i = 0 ; i < ab.size() ; i ++)
         {
             sum += abs(ab.get(i));
             lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.05f);
         }
-        // calculate the average of the sampples
-        //
+        
         average= sum / (float) ab.size();
-        // Smooth the average value over time using the lerp function
-        //
+
         smoothedAmplitude = lerp(smoothedAmplitude, average, 0.1f);
-        // calculate the centre point of the visualisation
-        //
+        
         float cx = width / 2;
         float cy = height / 2;
 
-        switch (mode) 
+        switch (mode)
         {
-            case 1:
+            case 0:
 
                 background(0);
                 strokeWeight(2);
@@ -108,29 +106,44 @@ public class ConorVisual extends Visual
                 }
                 
                 float overallAverage = total1 / (float) ab.size();
-                // Map average value to hue
-                //
-                float hue = map(overallAverage, 0, 1, 0, 360);
                 
-                float saturation = 255; 
-                float brightness = 255; 
-                // Set fill to none for the central circle
-                //
-                noFill();
-                // Set stroke color using HSB color mode
-                //
-                stroke(hue, saturation, brightness); 
-                float radius = overallAverage * halfH * 2;
-                // Draw central circle at the center of the canvas
-                //
-                ellipse(width/2, height/2, radius, radius);
+                // Draw central circle
+                float hue = map(overallAverage, 0, 1, 0, 360); // Map average value to hue
+                float saturation = 255; // Saturation set to maximum
+                float brightness = 255; // Brightness set to maximum
+                noFill(); // Set fill to none for the central circle
+                stroke(hue, saturation, brightness); // Set stroke color using HSB color mode
+                float radius = overallAverage * halfH * 2; // Scale radius based on overall average
+                ellipse(width/2, height/2, radius, radius); // Draw central circle at the center of the canvas
 
-                break;
+                // Draw circles on horizontal axis
+                //
+                for(int i = 0; i < ab.size(); i++) 
+                {   
+                    // Map hue value for individual data points
+                    //
+                    float huePoint = map(i, 0, ab.size(), 0, 360);
+
+                    float saturationPoint = 255; 
+                    float brightnessPoint = 255; 
+                    // Set fill color using HSB color mode
+                    //
+                    fill(huePoint, saturationPoint, brightnessPoint);
+
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+
+                    float pointRadius = abs(lerpedBuffer[i]) * halfH * 2;
+                    
+                    ellipse(i * 20 + 50, halfH, pointRadius, pointRadius); 
+                }
+                
+                break;    
         
             default:
+
                 break;
         }
 
-   }
+    }
 
 }
