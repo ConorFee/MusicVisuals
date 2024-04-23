@@ -115,6 +115,27 @@ public class ConorVisual extends Visual
                 stroke(hue, saturation, brightness); // Set stroke color using HSB color mode
                 float radius = overallAverage * halfH * 2; // Scale radius based on overall average
                 ellipse(width/2, height/2, radius, radius); // Draw central circle at the center of the canvas
+
+                // Draw circles on horizontal axis
+                //
+                for(int i = 0; i < ab.size(); i++) 
+                {   
+                    // Map hue value for individual data points
+                    //
+                    float huePoint = map(i, 0, ab.size(), 0, 360);
+
+                    float saturationPoint = 255; 
+                    float brightnessPoint = 255; 
+                    // Set fill color using HSB color mode
+                    //
+                    fill(huePoint, saturationPoint, brightnessPoint);
+
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+
+                    float pointRadius = abs(lerpedBuffer[i]) * halfH * 2;
+                    
+                    ellipse(i * 20 + 50, halfH, pointRadius, pointRadius); 
+                }
                 
                 break;    
         
