@@ -125,7 +125,18 @@ public class ConorVisual extends Visual
         if (millis() > 76000) {
             ap.pause(); // Pause the audio playback
         }
-    
+
+        if (millis() > 168000 && millis() < 196000) {
+            ap.play(168000); // Pause the audio playback
+        } else if (millis() > 196000) {
+            ap.pause(); // Pause the audio playback
+        }
+
+        if (millis() > 238000 && millis() < 260000) {
+            ap.play(238000); // Pause the audio playback
+        } else if (millis() > 260000) {
+            ap.pause(); // Pause the audio playback
+        }
 
     }
 

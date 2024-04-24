@@ -49,10 +49,6 @@ public class Sound1 extends Visual {
 
         ap.play(76000);
         ap.mute();
-        /*ap.play(28000);
-        if (ap.position() < 76000 || ap.position() > 76000) {
-            ap.mute();
-        }*/
 
         ab = ap.mix; // Ensure this is set after the player is confirmed to play
         fft = new FFT(ap.bufferSize(), ap.sampleRate());
@@ -122,9 +118,14 @@ public class Sound1 extends Visual {
         angle += 0.05;
 
         // for main, pause audio when second track begins.
-        if (millis() > 134000) {
+        if (millis() > 133000) {
             ap.pause(); // Pause the audio playback
         }
-        
+
+        if (millis() > 196000 && millis() < 213000) {
+            ap.play(196000); // Pause the audio playback
+        } else if (millis() > 213000) {
+            ap.pause(); // Pause the audio playback
+        }
     }
 }

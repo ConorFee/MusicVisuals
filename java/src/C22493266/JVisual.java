@@ -37,7 +37,7 @@ public class JVisual extends Visual {
         //ap.mute();
 
         //ai = m.getLineIn(Minim.MONO, width, 44100, 16);
-        ap.play();
+        ap.play(133000);
         b = ap.mix;
 
         cloudPostions = new ArrayList<>();                      //initialize list
@@ -45,9 +45,9 @@ public class JVisual extends Visual {
     }
 
     @Override
-    public void draw() {
+    public void draw() 
+    {
 
-             
              setGradient(0, 0, width, height, color(137, 255, 180), color(137, 255, 255)); // fades from light to darker blue sky
 
              float avg = 0; 
@@ -164,12 +164,14 @@ public class JVisual extends Visual {
             endShape();
         }
 
-        public void clouds() {
+        public void clouds() 
+        {
             fill(255);
             noStroke();
-            int DECRET = 30;            // variable i use to decrease the size of the clouds/cirlces as it uses the same sizing as the sun
+            int DECRET = 30; // variable i use to decrease the size of the clouds/cirlces as it uses the same sizing as the sun
 
-            for(PVector pos : cloudPostions){                                         // places cloudcluster at every stored CoOrdinate in cloudpositoins
+            for(PVector pos : cloudPostions)
+            {   // places cloudcluster at every stored CoOrdinate in cloudpositoins
                 ellipse(pos.x, pos.y, circleSize - DECRET, circleSize - DECRET);
                 ellipse(pos.x - 20, pos.y + 0, circleSize - DECRET, circleSize - DECRET);
                 ellipse(pos.x + 5, pos.y - 5, circleSize - DECRET, circleSize - DECRET);
@@ -180,10 +182,10 @@ public class JVisual extends Visual {
 
             }
 
-                                        //these are hard set clouds which I had originally
+            //these are hard set clouds which I had originally
             //top left clouds
             //ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
-           // ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
+            // ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
             //ellipse(100, 100, circleSize-DECRET, circleSize-DECRET);
             //ellipse(105, 95, circleSize-DECRET, circleSize-DECRET);
             //ellipse(110, 100, circleSize-DECRET, circleSize-DECRET);
@@ -191,15 +193,15 @@ public class JVisual extends Visual {
             //top right 
 
             //ellipse(630, 120, circleSize-DECRET, circleSize-DECRET);
-           // ellipse(620, 110, circleSize-DECRET, circleSize-DECRET);
-           /// ellipse(600, 120, circleSize-DECRET, circleSize-DECRET);
+            // ellipse(620, 110, circleSize-DECRET, circleSize-DECRET);
+            /// ellipse(600, 120, circleSize-DECRET, circleSize-DECRET);
             //ellipse(605, 115, circleSize-DECRET, circleSize-DECRET);
             //ellipse(610, 120, circleSize-DECRET, circleSize-DECRET);
 
 
             // mid
             //ellipse(430, 80, circleSize-DECRET, circleSize-DECRET);
-           // ellipse(420, 70, circleSize-DECRET, circleSize-DECRET);
+            // ellipse(420, 70, circleSize-DECRET, circleSize-DECRET);
             //ellipse(400, 80, circleSize-DECRET, circleSize-DECRET);
             ///ellipse(405, 75, circleSize-DECRET, circleSize-DECRET);
             //ellipse(410, 80, circleSize-DECRET, circleSize-DECRET);
@@ -207,12 +209,14 @@ public class JVisual extends Visual {
 
         }
 
-        public void cloudShadow() {
+        public void cloudShadow() 
+        {
             //fill(0);
             noStroke();
             int DECRET = 20;
 
-            for(PVector pos : cloudPostions){
+            for(PVector pos : cloudPostions)
+            {
                 //float hue = random(255);
                 //fill(hue, 255,255);
                 fill(0);
@@ -233,7 +237,7 @@ public class JVisual extends Visual {
 
 
             //top left clouds
-           // ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
+            // ellipse(130, 100, circleSize-DECRET, circleSize-DECRET);
            // ellipse(120, 90, circleSize-DECRET, circleSize-DECRET);
            // ellipse(100, 100, circleSize-DECRET, circleSize-DECRET);
            // ellipse(105, 95, circleSize-DECRET, circleSize-DECRET);
@@ -363,6 +367,11 @@ public class JVisual extends Visual {
             boolean isDead() {
                 return opacity <= 0 || size <= 0;
             }
+
+            
+            
         }
+        
+        
     }
 

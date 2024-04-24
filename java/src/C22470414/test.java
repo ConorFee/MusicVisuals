@@ -128,7 +128,13 @@ public class test extends Visual
         // for main, pause audio when second track begins.
         if (millis() > 28000) {
             player.pause(); // Pause the audio playback
-          }
+        }
+
+        if (millis() >= 213000 && millis() < 238000) {
+            player.play(213000); // Pause the audio playback
+        } else if (millis() > 238000) {
+            player.pause(); // Pause the audio playback
+        }
         
     }
     }

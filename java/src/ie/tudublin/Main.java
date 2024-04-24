@@ -15,6 +15,9 @@ public class Main extends PApplet {
     private boolean started3 = false;
     private boolean started4 = false;
     private boolean started5 = false;
+    private boolean started6 = false;
+    private boolean started7 = false;
+    private boolean started8 = false;
 
     public void startUI() {
         String[] a = { "MAIN" };
@@ -29,16 +32,28 @@ public class Main extends PApplet {
             } else if (currentTime > 28000 && currentTime <= 76000 && !started2) {
                 processing.core.PApplet.runSketch(a, new ConorVisual());
                 started2 = true;
-            } else if (currentTime > 76000 && currentTime <= 134000 && !started3) {
+            } else if (currentTime > 76000 && currentTime <= 133000 && !started3) {
                 processing.core.PApplet.runSketch(a, new Sound1());
                 started3 = true;
-            } else if (currentTime > 134000 && currentTime <= 196000 && !started4) {
-                processing.core.PApplet.runSketch(a, new ConorVisual());
-                started4 = true;
-            } else if (currentTime > 196000 && currentTime <= 198000 && !started5) {
+            } else if (currentTime > 133000 && currentTime <= 168000 && !started4) {
                 processing.core.PApplet.runSketch(a, new JVisual());
+                started4 = true;
+            } else if (currentTime > 168000 && currentTime <= 196000 && !started5) {
+                processing.core.PApplet.runSketch(a, new ConorVisual());
                 started5 = true;
-            } else if (currentTime > 198000) {
+            } else if (currentTime > 196000 && currentTime <= 213000 && !started5) {
+                processing.core.PApplet.runSketch(a, new Sound1());
+                started6 = true;
+            } else if (currentTime > 213000 && currentTime <= 238000 && !started5) {
+                processing.core.PApplet.runSketch(a, new test());
+                started7 = true;
+            } else if (currentTime > 238000 && currentTime <= 260000 && !started5) {
+                processing.core.PApplet.runSketch(a, new ConorVisual());
+                started8 = true;
+            } else if (currentTime > 260000 && currentTime <= 281000 && !started5) {
+                processing.core.PApplet.runSketch(a, new ConorVisual());
+                started8 = true;
+            } else if (currentTime > 281000) {
                 break; // End the loop when all visuals have been triggered
             }
 
