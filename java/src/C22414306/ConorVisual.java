@@ -5,10 +5,10 @@ import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ie.tudublin.Visual;
+import processing.core.PApplet;
 
 public class ConorVisual extends Visual
 {
-
     Minim minim;
     AudioPlayer ap;
     AudioInput ai;

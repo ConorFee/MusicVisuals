@@ -3,10 +3,10 @@ package C22470414;
 import processing.core.PApplet;
 import ddf.minim.*;
 import ddf.minim.analysis.*;
+import ie.tudublin.Visual;
 
-public class test extends PApplet 
+public class test extends Visual 
 {
-
     Minim minim;
     AudioPlayer player;
     FFT fft;

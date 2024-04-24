@@ -6,11 +6,12 @@ import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
+import ie.tudublin.Visual;
 import processing.core.PApplet;
 import processing.core.PVector;
 //import java.util.ArrayList;
 
-public class JVisual extends PApplet {
+public class JVisual extends Visual {
 
     Minim m;
     AudioInput ai;

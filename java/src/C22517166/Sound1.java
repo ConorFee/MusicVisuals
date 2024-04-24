@@ -6,9 +6,12 @@ import ddf.minim.AudioBuffer;
 import ddf.minim.AudioPlayer;
 import ddf.minim.analysis.FFT;
 import processing.core.PVector;
+import processing.core.PApplet;
+//import processing.core.PApplet;
 import processing.core.PFont;
 
 public class Sound1 extends Visual {
+    
     Minim minim;
     AudioPlayer ap;
     AudioBuffer ab;
@@ -46,19 +49,24 @@ public class Sound1 extends Visual {
         terrain = new float[cols][rows];
         minim = new Minim(this);
         ap = minim.loadFile("stayinit.mp3", 1024);
-        ab = ap.mix;
-        fft = new FFT(ap.bufferSize(), ap.sampleRate());
+        if (ap == null) {
+            System.err.println("Failed to load 'stayinit.mp3'");
+            return; // Exit if file fails to load
+        }
         ap.play();
-
+        ab = ap.mix; // Ensure this is set after the player is confirmed to play
+        fft = new FFT(ap.bufferSize(), ap.sampleRate());
+    
         currentColor = new PVector(random(360), 100, 100);
         targetColor = new PVector(random(360), 100, 100);
         frameCounter = 0;
-
+    
         font = createFont("Arial", 48, true);
         textFont(font);
     }
-
+    
     public void draw() {
+        
         flying -= 0.1f;
         float yoffset = flying;
         float maxAmp = 0;
@@ -112,5 +120,6 @@ public class Sound1 extends Visual {
         popMatrix();
 
         angle += 0.05;
+        
     }
 }
