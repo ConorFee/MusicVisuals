@@ -26,7 +26,7 @@ public class test extends Visual
     @Override
     public void settings() 
     {
-        size(800, 600); // Set the size of the window
+        size(1200, 1200, P3D); // Set the size of the window
     }
 
     @Override
