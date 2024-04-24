@@ -139,11 +139,10 @@ public class ConorVisual extends Visual
         }
 
         // for main, pause audio when second track begins.
-        if (millis() >= 76000) {
+        if (millis() > 76000) {
             ap.pause(); // Pause the audio playback
-            ap.mute();
-            ap.close();
         }
+    
 
     }
 

@@ -46,8 +46,9 @@ public class Sound1 extends Visual {
             System.err.println("Failed to load 'stayinit.mp3'");
             return; // Exit if file fails to load
         }
-        
+
         ap.play(76000);
+        ap.mute();
         /*ap.play(28000);
         if (ap.position() < 76000 || ap.position() > 76000) {
             ap.mute();
