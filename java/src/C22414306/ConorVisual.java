@@ -41,7 +41,7 @@ public class ConorVisual extends Visual
 
     public void settings()
     {
-        size(1024, 1000, P3D);
+        size(1200, 1200, P3D);
         //fullScreen(P3D, SPAN);
     }
 
@@ -95,44 +95,6 @@ public class ConorVisual extends Visual
             case 0:
 
                 background(0);
-                strokeWeight(2);
-            
-                // Calculate overall average value
-                float total1 = 0;
-
-                for(int i = 0; i < ab.size(); i++) 
-                {
-                    total1 += abs(ab.get(i));
-                }
-                
-                float overallAverage = total1 / (float) ab.size();
-                
-                // Draw circles on horizontal axis
-                //
-                for(int i = 0; i < ab.size(); i++) 
-                {   
-                    // Map hue value for individual data points
-                    //
-                    float huePoint = map(i, 0, ab.size(), 0, 360);
-
-                    float saturationPoint = 255; 
-                    float brightnessPoint = 255; 
-                    // Set fill color using HSB color mode
-                    //
-                    fill(huePoint, saturationPoint, brightnessPoint);
-
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-
-                    float pointRadius = abs(lerpedBuffer[i]) * halfH * 2;
-                    
-                    ellipse(i * 20 + 50, halfH, pointRadius, pointRadius); 
-                }
-                
-                break;   
-            
-            case 1:
-
-                background(0);
                 // Variable declaration and initialization
                 //
                 float radiusStep = 1;
@@ -163,10 +125,10 @@ public class ConorVisual extends Visual
             
                     // Increment angle for next circle
                     angle += angleStep;
-                }
-
-                break;
-        
+                }                
+                
+                break;   
+            
             default:
 
                 break;
