@@ -135,7 +135,7 @@ public class ConorVisual extends Visual
                 background(0);
                 // Variable declaration and initialization
                 //
-                float radiusStep = 5;
+                float radiusStep = 1;
                 double angleStep = 0.1;  
                 float angle = 0; 
                 float centerX = width / 2; 
