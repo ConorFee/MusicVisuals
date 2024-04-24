@@ -34,7 +34,6 @@ public class test extends Visual
     {
         colorMode(RGB, 255);
         minim = new Minim(this);
-
         // Load audio file
         player = minim.loadFile("stayinit.mp3");
         player.play();
@@ -125,6 +124,12 @@ public class test extends Visual
 
         //color offset for primary X shape
         colorOffset += colorChangeSpeed;
+
+        // for main, pause audio when second track begins.
+        if (millis() > 28000) {
+            player.pause(); // Pause the audio playback
+          }
+        
     }
     }
 

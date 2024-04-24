@@ -22,7 +22,7 @@ public class ConorVisual extends Visual
     float smoothedY = 0;
     float smoothedAmplitude = 0;
 
-    public void keyPressed() 
+    /*public void keyPressed() 
     {
 		if (key >= '0' && key <= '9')
         {
@@ -37,7 +37,7 @@ public class ConorVisual extends Visual
                 ap.play();
             }
         }
-	}
+	}*/
 
     public void settings()
     {
@@ -53,8 +53,11 @@ public class ConorVisual extends Visual
         // ab = ai.mix; 
         
         ap = minim.loadFile("stayinit.mp3", 1024);
-        ap.play();
-        ap.mute();
+        ap.play(28000);
+        /*ap.play(28000);
+        if (ap.position() < 28000 || ap.position() > 76000) {
+            ap.mute();
+        }*/
         ab = ap.mix;
         colorMode(HSB);
 
@@ -133,6 +136,13 @@ public class ConorVisual extends Visual
             default:
 
                 break;
+        }
+
+        // for main, pause audio when second track begins.
+        if (millis() >= 76000) {
+            ap.pause(); // Pause the audio playback
+            ap.mute();
+            ap.close();
         }
 
     }

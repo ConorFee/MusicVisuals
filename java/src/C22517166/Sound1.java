@@ -46,8 +46,13 @@ public class Sound1 extends Visual {
             System.err.println("Failed to load 'stayinit.mp3'");
             return; // Exit if file fails to load
         }
-        ap.play();
-        ap.mute();
+        
+        ap.play(76000);
+        /*ap.play(28000);
+        if (ap.position() < 76000 || ap.position() > 76000) {
+            ap.mute();
+        }*/
+
         ab = ap.mix; // Ensure this is set after the player is confirmed to play
         fft = new FFT(ap.bufferSize(), ap.sampleRate());
     
@@ -114,6 +119,11 @@ public class Sound1 extends Visual {
         popMatrix();
 
         angle += 0.05;
+
+        // for main, pause audio when second track begins.
+        if (millis() > 134000) {
+            ap.pause(); // Pause the audio playback
+        }
         
     }
 }

@@ -21,7 +21,6 @@ public class Main extends PApplet {
     public void startUI() {
         String[] a = { "MAIN" };
         startTime = millis(); // Record the start time
-
         while (true) {
             currentTime = millis() - startTime; // Calculate current time elapsed
 
