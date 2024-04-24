@@ -135,7 +135,7 @@ public class ConorVisual extends Visual
                 background(0);
                 // Variable declaration and initialization
                 //
-                float radiusStep = 1;
+                float radiusStep = 5;
                 double angleStep = 0.1;  
                 float angle = 0; 
                 float centerX = width / 2; 
@@ -143,7 +143,26 @@ public class ConorVisual extends Visual
 
                 for (int i = 0; i < ab.size(); i++)
                 {
-                    
+                    // Map audio data to circle size and color
+                    //
+                    float circleSize = abs(lerpedBuffer[i]) * 500;
+                    // Map index to hue
+                    //
+                    float hue = map(i, 0, ab.size(), 0, 360);
+                    float saturation = 255;
+                    float brightness = 255; 
+
+                    // Calculate x-coordinate and y-coordinate
+                    float x = centerX + cos((float)angle) * (i * radiusStep);
+                    float y = centerY + sin((float)angle) * (i * radiusStep); 
+            
+                    // Set circle color and draw circle
+                    stroke(hue, saturation, brightness);
+                    fill(hue, saturation, brightness);
+                    ellipse(x, y, circleSize, circleSize);
+            
+                    // Increment angle for next circle
+                    angle += angleStep;
                 }
 
                 break;
