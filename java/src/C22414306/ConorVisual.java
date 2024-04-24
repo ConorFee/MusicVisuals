@@ -52,7 +52,7 @@ public class ConorVisual extends Visual
         // ai = minim.getLineIn(Minim.MONO, width, 44100, 16);
         // ab = ai.mix; 
         
-        ap = minim.loadFile("heartless.mp3", 1024);
+        ap = minim.loadFile("stayinit.mp3", 1024);
         ap.play();
         ab = ap.mix;
         colorMode(HSB);
@@ -107,15 +107,6 @@ public class ConorVisual extends Visual
                 
                 float overallAverage = total1 / (float) ab.size();
                 
-                // Draw central circle
-                float hue = map(overallAverage, 0, 1, 0, 360); // Map average value to hue
-                float saturation = 255; // Saturation set to maximum
-                float brightness = 255; // Brightness set to maximum
-                noFill(); // Set fill to none for the central circle
-                stroke(hue, saturation, brightness); // Set stroke color using HSB color mode
-                float radius = overallAverage * halfH * 2; // Scale radius based on overall average
-                ellipse(width/2, height/2, radius, radius); // Draw central circle at the center of the canvas
-
                 // Draw circles on horizontal axis
                 //
                 for(int i = 0; i < ab.size(); i++) 
@@ -137,7 +128,44 @@ public class ConorVisual extends Visual
                     ellipse(i * 20 + 50, halfH, pointRadius, pointRadius); 
                 }
                 
-                break;    
+                break;   
+            
+            case 1:
+
+                background(0);
+                // Variable declaration and initialization
+                //
+                float radiusStep = 1;
+                double angleStep = 0.1;  
+                float angle = 0; 
+                float centerX = width / 2; 
+                float centerY = height / 2; 
+
+                for (int i = 0; i < ab.size(); i++)
+                {
+                    // Map audio data to circle size and color
+                    //
+                    float circleSize = abs(lerpedBuffer[i]) * 500;
+                    // Map index to hue
+                    //
+                    float hue = map(i, 0, ab.size(), 0, 360);
+                    float saturation = 255;
+                    float brightness = 255; 
+
+                    // Calculate x-coordinate and y-coordinate
+                    float x = centerX + cos((float)angle) * (i * radiusStep);
+                    float y = centerY + sin((float)angle) * (i * radiusStep); 
+            
+                    // Set circle color and draw circle
+                    stroke(hue, saturation, brightness);
+                    fill(hue, saturation, brightness);
+                    ellipse(x, y, circleSize, circleSize);
+            
+                    // Increment angle for next circle
+                    angle += angleStep;
+                }
+
+                break;
         
             default:
 

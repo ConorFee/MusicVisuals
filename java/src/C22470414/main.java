@@ -1,7 +1,7 @@
 package C22470414;
 
 
-public class Main
+public class main
 {
 
 	public void processing()
@@ -10,12 +10,12 @@ public class Main
         processing.core.PApplet.runSketch( a, new test());
     }
 	
-	public static void main(String[] args)
+	public static void Main(String[] args)
 	{
 		System.out.println("STAYINNIT");
 		
 		
-		Main m = new Main();
+		main m = new main();
 	
 
 		m.processing();
