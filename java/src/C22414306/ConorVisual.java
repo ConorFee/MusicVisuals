@@ -54,6 +54,7 @@ public class ConorVisual extends Visual
         
         ap = minim.loadFile("stayinit.mp3", 1024);
         ap.play();
+        ap.mute();
         ab = ap.mix;
         colorMode(HSB);
 

@@ -4,10 +4,9 @@ import C22414306.ConorVisual;
 import C22470414.test;
 import C22493266.JVisual;
 import C22517166.*;
-import example.CubeVisual;
 import example.MyVisual;
 import processing.core.PApplet;
-import stayinit.stayinit;
+//import stayinit.stayinit;
 
 public class Main extends PApplet {
 
@@ -28,19 +27,19 @@ public class Main extends PApplet {
 
             // Check if it's time to start each visual
             if (currentTime >= 0 && currentTime <= 28000 && !started1) {
-                processing.core.PApplet.runSketch(a, new Sound1());
+                processing.core.PApplet.runSketch(a, new test());
                 started1 = true;
             } else if (currentTime > 28000 && currentTime <= 76000 && !started2) {
                 processing.core.PApplet.runSketch(a, new ConorVisual());
                 started2 = true;
             } else if (currentTime > 76000 && currentTime <= 134000 && !started3) {
-                processing.core.PApplet.runSketch(a, new JVisual());
+                processing.core.PApplet.runSketch(a, new Sound1());
                 started3 = true;
             } else if (currentTime > 134000 && currentTime <= 196000 && !started4) {
-                processing.core.PApplet.runSketch(a, new test());
+                processing.core.PApplet.runSketch(a, new ConorVisual());
                 started4 = true;
             } else if (currentTime > 196000 && currentTime <= 198000 && !started5) {
-                processing.core.PApplet.runSketch(a, new MyVisual());
+                processing.core.PApplet.runSketch(a, new JVisual());
                 started5 = true;
             } else if (currentTime > 198000) {
                 break; // End the loop when all visuals have been triggered

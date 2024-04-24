@@ -33,7 +33,9 @@ public class JVisual extends Visual {
     @Override
     public void setup() {
         m = new Minim(this);
-        //ap = m.loadFile("stayinit.mp3");
+        ap = m.loadFile("stayinit.mp3");
+        ap.mute();
+
         //ai = m.getLineIn(Minim.MONO, width, 44100, 16);
         ap.play();
         b = ap.mix;

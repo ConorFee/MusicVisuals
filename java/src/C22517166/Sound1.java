@@ -35,13 +35,6 @@ public class Sound1 extends Visual {
         size(1200, 1200, P3D);
     }
 
-    public void keyPressed() {
-        if (key == ' ') {
-            ap.cue(0);
-            ap.play();
-        }
-    }
-
     public void setup() {
         colorMode(HSB, 360, 100, 100);
         cols = w / scale;
@@ -54,6 +47,7 @@ public class Sound1 extends Visual {
             return; // Exit if file fails to load
         }
         ap.play();
+        ap.mute();
         ab = ap.mix; // Ensure this is set after the player is confirmed to play
         fft = new FFT(ap.bufferSize(), ap.sampleRate());
     
