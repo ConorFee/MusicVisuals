@@ -22,12 +22,14 @@ public class ConorVisual extends Visual
     float smoothedY = 0;
     float smoothedAmplitude = 0;
 
+    @Override
     public void settings()
     {
         size(1200, 1200, P3D);
         //fullScreen(P3D, SPAN);
     }
 
+    @Override
     public void setup()
     {
         minim = new Minim(this);
@@ -51,6 +53,7 @@ public class ConorVisual extends Visual
     float smoothedAverage = 0;
     float x = 0;
 
+    @Override
     public void draw()
     {
 
@@ -59,6 +62,7 @@ public class ConorVisual extends Visual
         float average = 0;
         float sum = 0;
         off += 1;
+        int startTime = millis();
         // Calculate sum and average of the samples
         // Also lerp each element of buffer;
         for(int i = 0 ; i < ab.size() ; i ++)
@@ -118,19 +122,24 @@ public class ConorVisual extends Visual
                 break;
         }
 
-        // for main, pause audio when second track begins.
-        if (millis() > 76000) {
+        // Resume audio playback when the second track begins
+        if (startTime > 76000 && startTime < 168000) {
             ap.pause(); // Pause the audio playback
+        } else if (startTime > 168000 && startTime < 196000) {
+            ap.play(168000); // Resume audio playback
+        } else if (startTime == 196000) {
+            ap.pause(); // Pause audio playback
         }
-
-        if (millis() > 168000 && millis() < 196000) {
-            ap.play(168000); // Pause the audio playback
-        } else if (millis() > 196000) {
+        
+        /*if (millis() == 196000) {
             ap.pause(); // Pause the audio playback
-        }
+        }*/
 
+        // Check if the current time is between 196000 and 213000 milliseconds
         if (millis() > 238000 && millis() < 260000) {
-            ap.play(238000); // Pause the audio playback
+            if (!ap.isPlaying()) { // Check if the audio is not already playing
+                ap.play(238000); // Resume audio playback
+            }
         } else if (millis() > 260000) {
             ap.pause(); // Pause the audio playback
         }

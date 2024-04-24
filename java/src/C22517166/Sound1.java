@@ -31,10 +31,12 @@ public class Sound1 extends Visual {
     PFont font;
     float angle = 0;
 
+    @Override
     public void settings() {
         size(1200, 1200, P3D);
     }
 
+    @Override
     public void setup() {
         colorMode(HSB, 360, 100, 100);
         cols = w / scale;
@@ -48,7 +50,7 @@ public class Sound1 extends Visual {
         }
 
         ap.play(76000);
-        ap.mute();
+        //ap.mute();
 
         ab = ap.mix; // Ensure this is set after the player is confirmed to play
         fft = new FFT(ap.bufferSize(), ap.sampleRate());
@@ -61,11 +63,13 @@ public class Sound1 extends Visual {
         textFont(font);
     }
     
+    @Override
     public void draw() {
         
         flying -= 0.1f;
         float yoffset = flying;
         float maxAmp = 0;
+        int startTime = millis();
 
         for (int i = 0; i < ab.size(); i++) {
             maxAmp = max(ab.get(i), maxAmp);
@@ -117,15 +121,19 @@ public class Sound1 extends Visual {
 
         angle += 0.05;
 
-        // for main, pause audio when second track begins.
-        if (millis() > 133000) {
+        // Resume audio playback when the second track begins
+        if (startTime > 133000) {
             ap.pause(); // Pause the audio playback
         }
 
+        // Check if the current time is between 196000 and 213000 milliseconds
         if (millis() > 196000 && millis() < 213000) {
-            ap.play(196000); // Pause the audio playback
+            if (!ap.isPlaying()) { // Check if the audio is not already playing
+                ap.play(196000); // Resume audio playback
+            }
         } else if (millis() > 213000) {
             ap.pause(); // Pause the audio playback
         }
+
     }
 }

@@ -56,6 +56,7 @@ public class JVisual extends Visual {
         }
         avg /= b.size(); // average creation complete at this point, measured sound
         circleSize = map(avg, 0, 1, 50, 300); // size rangeees
+        int startTime = millis();
 
         drawMountainsShadow(avg);
         drawMountains(avg);
@@ -105,6 +106,25 @@ public class JVisual extends Visual {
             smokes.add(new Smoke(jointX, jointY));
         }
         smokeTimer++;
+
+        if (startTime > 168000) {
+            ap.pause(); // Pause the audio playback
+        }
+
+        /*if (millis() > 260000 && millis() < 281000) {
+            ap.play(260000); // Pause the audio playback
+        } else if (millis() > 281000) {
+            ap.pause(); // Pause the audio playback
+        }*/
+
+        // Check if the current time is between 196000 and 213000 milliseconds
+        if (millis() > 260000 && millis() < 281000) {
+            if (!ap.isPlaying()) { // Check if the audio is not already playing
+                ap.play(260000); // Resume audio playback
+            }
+        } else if (millis() > 281000) {
+            ap.pause(); // Pause the audio playback
+        }
 
     }
 

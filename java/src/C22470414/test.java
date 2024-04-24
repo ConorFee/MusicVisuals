@@ -130,10 +130,19 @@ public class test extends Visual
             player.pause(); // Pause the audio playback
         }
 
-        if (millis() >= 213000 && millis() < 238000) {
+        /*if (millis() >= 213000 && millis() < 238000) {
             player.play(213000); // Pause the audio playback
         } else if (millis() > 238000) {
             player.pause(); // Pause the audio playback
+        }*/
+
+        // Check if the current time is between 196000 and 213000 milliseconds
+        if (millis() > 213000 && millis() < 238000) {
+            if (!ap.isPlaying()) { // Check if the audio is not already playing
+                ap.play(213000); // Resume audio playback
+            }
+        } else if (millis() > 238000) {
+            ap.pause(); // Pause the audio playback
         }
         
     }
