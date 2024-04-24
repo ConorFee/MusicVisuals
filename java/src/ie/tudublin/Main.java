@@ -1,16 +1,10 @@
 package ie.tudublin;
 
-<<<<<<< HEAD
 import C22414306.ConorVisual;
 import C22470414.test;
 import C22493266.JVisual;
 import C22517166.Sound1;
-import example.MyVisual;
 import processing.core.PApplet;
-//import stayinit.stayinit;
-=======
-import stayinit.stayinit;
->>>>>>> bf6e776 (bla)
 
 public class Main extends PApplet {
 
