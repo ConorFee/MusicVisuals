@@ -107,15 +107,6 @@ public class ConorVisual extends Visual
                 
                 float overallAverage = total1 / (float) ab.size();
                 
-                // Draw central circle
-                float hue = map(overallAverage, 0, 1, 0, 360); // Map average value to hue
-                float saturation = 255; // Saturation set to maximum
-                float brightness = 255; // Brightness set to maximum
-                noFill(); // Set fill to none for the central circle
-                stroke(hue, saturation, brightness); // Set stroke color using HSB color mode
-                float radius = overallAverage * halfH * 2; // Scale radius based on overall average
-                ellipse(width/2, height/2, radius, radius); // Draw central circle at the center of the canvas
-
                 // Draw circles on horizontal axis
                 //
                 for(int i = 0; i < ab.size(); i++) 
