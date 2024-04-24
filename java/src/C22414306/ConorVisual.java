@@ -128,7 +128,25 @@ public class ConorVisual extends Visual
                     ellipse(i * 20 + 50, halfH, pointRadius, pointRadius); 
                 }
                 
-                break;    
+                break;   
+            
+            case 1:
+
+                background(0);
+                // Variable declaration and initialization
+                //
+                float radiusStep = 1;
+                double angleStep = 0.1;  
+                float angle = 0; 
+                float centerX = width / 2; 
+                float centerY = height / 2; 
+
+                for (int i = 0; i < ab.size(); i++)
+                {
+                    
+                }
+
+                break;
         
             default:
 
