@@ -10,7 +10,7 @@ public class main
         processing.core.PApplet.runSketch( a, new test());
     }
 	
-	public static void main(String[] args)
+	public static void Main(String[] args)
 	{
 		System.out.println("STAYINNIT");
 		
