@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"name": "MusicVisuals",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"java.debug.settings.onBuildFailureProceed": true
+	}
+}

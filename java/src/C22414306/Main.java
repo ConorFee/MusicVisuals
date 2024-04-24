@@ -1,16 +1,23 @@
 package C22414306;
 
-public class Main {
+public class Main
+{
 
-    public void startUI() 
-    {
-        String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch(a, new ConorVisual());
-    }
+   public void helloProcessing()
+   {
+       String[] a = {"MAIN"};
 
-    public static void main(String[] args)
-    {
-        Main m = new Main();
-        m.startUI();
-    }
+       processing.core.PApplet.runSketch( a, new ConorVisual());
+       
+   }
+   
+   public static void main(String[] args)
+   {
+       System.out.println("Hello world");
+    
+       Main m = new Main();
+
+       m.helloProcessing();
+   }
+   
 }
