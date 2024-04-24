@@ -7,7 +7,7 @@ import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ie.tudublin.Visual;
-import processing.core.PApplet;
+//import processing.core.PApplet;
 import processing.core.PVector;
 //import java.util.ArrayList;
 

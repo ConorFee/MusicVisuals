@@ -5,7 +5,7 @@ import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ie.tudublin.Visual;
-import processing.core.PApplet;
+//import processing.core.PApplet;
 
 public class ConorVisual extends Visual
 {
@@ -75,7 +75,7 @@ public class ConorVisual extends Visual
     {
 
         background(0);
-        float halfH = height / 2;
+        //float halfH = height / 2;
         float average = 0;
         float sum = 0;
         off += 1;
@@ -91,8 +91,8 @@ public class ConorVisual extends Visual
 
         smoothedAmplitude = lerp(smoothedAmplitude, average, 0.1f);
         
-        float cx = width / 2;
-        float cy = height / 2;
+        //float cx = width / 2;
+        //float cy = height / 2;
 
         switch (mode)
         {

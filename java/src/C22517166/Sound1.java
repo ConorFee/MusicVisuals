@@ -6,7 +6,7 @@ import ddf.minim.AudioBuffer;
 import ddf.minim.AudioPlayer;
 import ddf.minim.analysis.FFT;
 import processing.core.PVector;
-import processing.core.PApplet;
+//import processing.core.PApplet;
 //import processing.core.PApplet;
 import processing.core.PFont;
 
