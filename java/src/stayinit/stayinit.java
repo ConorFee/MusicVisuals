@@ -45,7 +45,7 @@ public class stayinit extends PApplet {
     }
 
     public void draw() {
-        background(0);
+        //background(0);
         switch(mode) {
             case 1:
                 oisin.draw();
