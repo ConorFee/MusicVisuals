@@ -1,7 +1,6 @@
 package C22493266;
 
 import java.util.ArrayList;
-
 import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
@@ -51,8 +50,9 @@ public class JVisual extends Visual {
 
         drawMountains(avg);
         drawMountainsShadow(avg);
-        drawFields();
         drawCow(avg, circleSize);
+        drawSun();
+        drawFields();
         drawShroom(avg);
 
         cloudShadow();
@@ -257,5 +257,4 @@ public class JVisual extends Visual {
         }
 
     }
-
 }
