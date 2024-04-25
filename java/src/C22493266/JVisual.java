@@ -27,7 +27,8 @@ public class JVisual extends Visual {
 
     @Override
     public void settings() {
-        size(800, 600); // window size
+        //size(800, 600); // window size
+        fullScreen(P3D, SPAN); // full screen mode
     }
 
     @Override
@@ -43,7 +44,7 @@ public class JVisual extends Visual {
         cloudPostions = new ArrayList<>(); // initialize list
 
     }
-    
+
     public boolean started1 = false;
 
     @Override

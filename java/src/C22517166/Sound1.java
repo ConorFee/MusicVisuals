@@ -33,7 +33,8 @@ public class Sound1 extends Visual {
 
     @Override
     public void settings() {
-        size(1200, 1200, P3D);
+        //size(1200, 1200, P3D);
+        fullScreen(P3D, SPAN);
     }
 
     @Override

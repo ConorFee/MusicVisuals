@@ -25,8 +25,8 @@ public class ConorVisual extends Visual
     @Override
     public void settings()
     {
-        size(1200, 1200, P3D);
-        //fullScreen(P3D, SPAN);
+        //size(1200, 1200, P3D);
+        fullScreen(P3D, SPAN);
     }
 
     @Override
