@@ -63,6 +63,7 @@ public class test extends Visual
     }
 
     public boolean started1 = false;
+    public boolean started2 = false;
 
     @Override
     public void draw() 
@@ -128,15 +129,16 @@ public class test extends Visual
         colorOffset += colorChangeSpeed;
 
         // Resume audio playback when the second track begins
-        if (millis() > 28000 && millis() < 213000) {
-            ap.pause(); // Pause the audio playback
+        if (millis() > 28000 && millis() < 213000 && !started2) {
+            player.pause(); // Pause the audio playback
+            started2 = true;
         }
         
         if (millis() > 213000 && millis() <= 238000 && !started1) {
-            ap.play(213000); // Resume audio playback
+            player.play(213000); // Resume audio playback
             started1 = true;
         } else if (millis() > 238000) {
-            ap.pause(); // Pause audio playback
+            player.pause(); // Pause audio playback
         }
         
     }
