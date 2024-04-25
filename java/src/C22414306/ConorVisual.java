@@ -132,7 +132,7 @@ public class ConorVisual extends Visual
         if (startTime > 168000 && startTime <= 196000 && !started1) {
             ap.play(168000); // Resume audio playback
             started1 = true;
-        } else if (startTime > 196000) {
+        } else if (startTime > 196000 && startTime < 238000) {
             ap.pause(); // Pause audio playback
         }
 
