@@ -34,7 +34,9 @@ public class JVisual extends Visual {
     @Override
     public void setup() {
         m = new Minim(this);
+        background(0,181,226);
         ap = m.loadFile("stayinit.mp3");
+    
         // ap.mute();
 
         // ai = m.getLineIn(Minim.MONO, width, 44100, 16);
@@ -42,13 +44,6 @@ public class JVisual extends Visual {
         b = ap.mix;
 
         cloudPostions = new ArrayList<>(); // initialize list
-
-        // Set up variables for full-screen positioning and sizing
-        float widthRatio = width / 800.0f; // Width ratio to adjust sizes
-        float heightRatio = height / 600.0f; // Height ratio to adjust sizes
-
-        // Adjust positions and sizes of elements based on screen dimensions
-        circleSize *= widthRatio; // Adjust circleSize based on width
     }
 
 
@@ -57,7 +52,7 @@ public class JVisual extends Visual {
     @Override
     public void draw() {
 
-        setGradient(0, 0, width, height, color(137, 255, 180), color(137, 255, 255)); // fades from light to darker blue
+        //setGradient(0, 0, width, height, color(137, 255, 180), color(137, 255, 255)); // fades from light to darker blue
                                                                                       // sky
 
         float avg = 0;
@@ -276,6 +271,7 @@ public class JVisual extends Visual {
 
         // Body
         fill(255);
+        stroke(2);
         ellipse(cowX, cowY, 100, 150);
 
         // Ears
@@ -284,10 +280,11 @@ public class JVisual extends Visual {
         ellipse(cowX + 22, cowY - 100, 20, 20);
 
         // Head
+        stroke(2);
         ellipse(cowX, cowY - 60, 65, 85);
 
         // mouth
-        fill(0);
+        noFill();
         ellipse(cowX, cowY - 29, circleSize / 2, circleSize / 4);
 
         // joint
@@ -308,6 +305,7 @@ public class JVisual extends Visual {
 
         // Legs and spots
         fill(0);
+        stroke(2);
         rect(cowX - 45, cowY + 30, 15, 40);
         rect(cowX + 30, cowY + 30, 15, 40);
         ellipse(cowX - 10, cowY, 20, 15);
@@ -315,6 +313,7 @@ public class JVisual extends Visual {
 
         // Tail
         stroke(0);
+        stroke(2);
         line(cowX + 50, cowY, cowX + 70, cowY - 20);
         fill(0);
         ellipse(cowX + 70, cowY - 20, 10, 10);
@@ -323,8 +322,8 @@ public class JVisual extends Visual {
     }
 
     void drawShroom(float avg) {
-        float shroomX = 200;
-        float shroomY = 500;
+        float shroomX = 350;
+        float shroomY = 650;
 
         // stem of the mushroom
         fill(255);
