@@ -62,6 +62,8 @@ public class test extends Visual
         startTime = millis();
     }
 
+    public boolean started1 = false;
+
     @Override
     public void draw() 
     {
@@ -125,24 +127,16 @@ public class test extends Visual
         //color offset for primary X shape
         colorOffset += colorChangeSpeed;
 
-        // for main, pause audio when second track begins.
-        if (millis() > 28000) {
-            player.pause(); // Pause the audio playback
-        }
-
-        /*if (millis() >= 213000 && millis() < 238000) {
-            player.play(213000); // Pause the audio playback
-        } else if (millis() > 238000) {
-            player.pause(); // Pause the audio playback
-        }*/
-
-        // Check if the current time is between 196000 and 213000 milliseconds
-        if (millis() > 213000 && millis() < 238000) {
-            if (!ap.isPlaying()) { // Check if the audio is not already playing
-                ap.play(213000); // Resume audio playback
-            }
-        } else if (millis() > 238000) {
+        // Resume audio playback when the second track begins
+        if (millis() > 28000 && millis() < 213000) {
             ap.pause(); // Pause the audio playback
+        }
+        
+        if (millis() > 213000 && millis() <= 238000 && !started1) {
+            ap.play(213000); // Resume audio playback
+            started1 = true;
+        } else if (millis() > 238000) {
+            ap.pause(); // Pause audio playback
         }
         
     }

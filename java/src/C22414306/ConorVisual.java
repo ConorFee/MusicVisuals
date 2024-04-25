@@ -52,6 +52,8 @@ public class ConorVisual extends Visual
     float off = 0;
     float smoothedAverage = 0;
     float x = 0;
+    public boolean started1 = false;
+    public boolean started2 = false;
 
     @Override
     public void draw()
@@ -125,25 +127,22 @@ public class ConorVisual extends Visual
         // Resume audio playback when the second track begins
         if (startTime > 76000 && startTime < 168000) {
             ap.pause(); // Pause the audio playback
-        } else if (startTime > 168000 && startTime < 196000) {
+        }
+        
+        if (startTime > 168000 && startTime <= 196000 && !started1) {
             ap.play(168000); // Resume audio playback
-        } else if (startTime == 196000) {
+            started1 = true;
+        } else if (startTime > 196000) {
+            ap.pause(); // Pause audio playback
+        }
+
+        if (startTime > 238000 && startTime <= 260000 && !started2) {
+            ap.play(238000); // Resume audio playback
+            started2 = true;
+        } else if (startTime > 260000) {
             ap.pause(); // Pause audio playback
         }
         
-        /*if (millis() == 196000) {
-            ap.pause(); // Pause the audio playback
-        }*/
-
-        // Check if the current time is between 196000 and 213000 milliseconds
-        if (millis() > 238000 && millis() < 260000) {
-            if (!ap.isPlaying()) { // Check if the audio is not already playing
-                ap.play(238000); // Resume audio playback
-            }
-        } else if (millis() > 260000) {
-            ap.pause(); // Pause the audio playback
-        }
-
     }
 
 }

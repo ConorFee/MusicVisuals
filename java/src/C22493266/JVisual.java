@@ -43,6 +43,8 @@ public class JVisual extends Visual {
         cloudPostions = new ArrayList<>(); // initialize list
 
     }
+    
+    public boolean started1 = false;
 
     @Override
     public void draw() {
@@ -107,23 +109,16 @@ public class JVisual extends Visual {
         }
         smokeTimer++;
 
-        if (startTime > 168000) {
+        // Resume audio playback when the second track begins
+        if (startTime > 168000 && startTime < 260000) {
             ap.pause(); // Pause the audio playback
         }
-
-        /*if (millis() > 260000 && millis() < 281000) {
-            ap.play(260000); // Pause the audio playback
-        } else if (millis() > 281000) {
-            ap.pause(); // Pause the audio playback
-        }*/
-
-        // Check if the current time is between 196000 and 213000 milliseconds
-        if (millis() > 260000 && millis() < 281000) {
-            if (!ap.isPlaying()) { // Check if the audio is not already playing
-                ap.play(260000); // Resume audio playback
-            }
-        } else if (millis() > 281000) {
-            ap.pause(); // Pause the audio playback
+        
+        if (startTime > 260000 && startTime <= 281000 && !started1) {
+            ap.play(260000); // Resume audio playback
+            started1 = true;
+        } else if (startTime > 281000) {
+            ap.pause(); // Pause audio playback
         }
 
     }
