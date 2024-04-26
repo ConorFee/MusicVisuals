@@ -25,6 +25,11 @@ drawXShape(): This method draws X shapes on the screen. It adjusts the thickness
 The program essentially listens to music, analyzes its characteristics, and creates visual patterns based on that analysis. It also includes an introduction animation at the beginning.
 # What I am most proud of in the assignment
 
+# Stayinit Music Visual Video
+
+[![YouTube](http://img.youtube.com/vi/6M4VD_6KQxA/0.jpg)](https://youtu.be/6M4VD_6KQxA)
+
+
 # Markdown Tutorial
 
 This is *emphasis*
