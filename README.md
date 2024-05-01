@@ -24,6 +24,7 @@ intro(): This method handles the introduction animation, displaying text on the 
 drawXShape(): This method draws X shapes on the screen. It adjusts the thickness and color of the lines based on parameters passed to it.
 The program essentially listens to music, analyzes its characteristics, and creates visual patterns based on that analysis. It also includes an introduction animation at the beginning.
 # What I am most proud of in the assignment
+(c22470141)Being able to use my knowlegde of java to create art, based on music and not just answer questions on a paper.
 
 # Stayinit Music Visual Video
 
