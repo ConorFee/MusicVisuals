@@ -16,10 +16,10 @@ Song: stayinit by Fred again
 
 # How it works
 For Marks(C22470414) Visual:
-Class Declaration: This is the main class of the program, named "test". It extends a class called "Visual", indicating it's probably part of a larger system for visuals.
+Class Declaration: This is the main class of the program, named "test". It extends a class called "Visual".
 Variables: Various variables are declared to hold data like audio amplitude, sizes, colors, and timing information.
 settings(): This method sets up the size and rendering mode of the window.
-setup(): This method initializes the program. It sets up audio processing, loads an audio file, initializes arrays, sets initial values for visual elements, and sets the background color.
+setup(): This method initializes the program. It sets up audio processing, loads an audio file, initializes arrays, sets initial values for visual elements.
 draw(): This method is the main loop of the program. It checks if an introductory animation is done. If not, it runs the introduction. If the intro is done, it processes the audio, calculates amplitudes, adjusts the visual elements based on the music, draws the visuals, and manages audio playback timing.
 intro(): This method handles the introduction animation, displaying text on the screen with fading effects.
 drawXShape(): This method draws X shapes on the screen. It adjusts the thickness and color of the lines based on parameters passed to it.
