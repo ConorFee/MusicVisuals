@@ -29,7 +29,7 @@ For ConorVisual : C22414306
 
 ![An image](images/ConorVisual.png)
 
-ConorVisual.java uses the Minim library for audio processing and the Processing library for rendering graphics. This visualizer creates a dynamic spiral of circles that react to the music being played.
+ConorVisual.java uses the Minim library for audio processing and the Processing library for rendering graphics. This visualiser creates a dynamic spiral of circles that react to the music being played.
 The ConorVisual class extends the Visual class from the ie.tudublin package, inheriting its properties and methods. The key components of this class include: *Audio Processing, Display Setup and Drawing and Visualisation.*
 For the Audio Processing, The Minim library is used to handle audio input and playback. An AudioPlayer object (ap) is initialised to load and play an MP3 file ("stayinit.mp3").
 The audio buffer (ab) is retrieved from the audio player to access real-time audio data.
@@ -45,6 +45,10 @@ This setup results in a dynamic, colorful spiral of circles that pulsate and cha
 
 # What I am most proud of in the assignment
 (c22470141)Being able to use my knowlegde of java to create art, based on music and not just answer questions on a paper.
+
+C22414306 :  
+A proud achievement for this project is to integrate a successful real-time audio processing with dynamic visual rendering, creating a visually captivating and responsive music visualiser. 
+Through this work, I learned how to synchronize audio data with graphical elements, improving my skills in both audio manipulation and creative coding with the Minim and Processing libraries.
 
 # Stayinit Music Visual Video
 
