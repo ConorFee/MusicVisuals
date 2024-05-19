@@ -24,6 +24,12 @@ draw(): This method is the main loop of the program. It checks if an introductor
 intro(): This method handles the introduction animation, displaying text on the screen with fading effects.
 drawXShape(): This method draws X shapes on the screen. It adjusts the thickness and color of the lines based on parameters passed to it.
 The program essentially listens to music, analyzes its characteristics, and creates visual patterns based on that analysis. It also includes an introduction animation at the beginning.
+
+For ConorVisual : C22414306
+
+![An image](images/ConorVisual.png)
+
+
 # What I am most proud of in the assignment
 (c22470141)Being able to use my knowlegde of java to create art, based on music and not just answer questions on a paper.
 
