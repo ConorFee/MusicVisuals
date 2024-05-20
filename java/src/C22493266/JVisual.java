@@ -27,8 +27,8 @@ public class JVisual extends Visual {
 
     @Override
     public void settings() {
-        //size(800, 600); // window size
-        fullScreen(P3D, SPAN); // full screen mode
+        size(800, 600); // window size
+        //fullScreen(P3D, SPAN); // full screen mode
     }
 
     @Override
