@@ -42,6 +42,9 @@ Color Mapping: Each circle's color is determined by mapping its index to the hue
 Circle Drawing: The ellipse function is used to draw each circle at the calculated position, with its size proportional to the audio buffer's amplitude.
 This setup results in a dynamic, colorful spiral of circles that pulsate and change in response to the music, providing an engaging visual experience synchronized with the audio.
 
+For Oisin (Sound1 Visual) :
+
+My program  generates dynamic 3D terrain synchronized with an audio track. The program uses the Minim library to handle audio playback and analysis, creating visual effects based on the music. It initializes audio playback of our file "stayinit.mp3" and analyzes the audio buffer. The terrain's height is modulated by the audio amplitude, producing peaks and valleys that change with the music. Also, the background color transitions smoothly between colors over time. The text "stayinit" rotates in the 3D space, adding a visual focal point.
 
 For JVisual : C22493266
 
@@ -81,6 +84,9 @@ My visualisation is simple and fun as it is a collection of layered shapes which
 C22414306 :  
 A proud achievement for this project is to integrate a successful real-time audio processing with dynamic visual rendering, creating a visually captivating and responsive music visualiser. 
 Through this work, I learned how to synchronize audio data with graphical elements, improving my skills in both audio manipulation and creative coding with the Minim and Processing libraries.
+
+C22517166 :
+This assignment has significantly enhanced my Java programming skills, particularly in multimedia processing and 3D graphics. By working with libraries like Minim and Processing, I've gained experience in audio analysis, real-time visualization, and dynamic user interfaces. This has really helped my understanding of object-oriented programming and improved my ability to create complex, interactive applications.
 
 C22493266 :
 My proudest feature in my visualiser is the smoking cow, I created it entirely by myself at the end when i had created everything else. It is an accumulation of all the knowledge and techniques I had learned from researching and experimentation.
