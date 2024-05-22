@@ -44,6 +44,8 @@ This setup results in a dynamic, colorful spiral of circles that pulsate and cha
 
 For Oisin (Sound1 Visual) :
 
+![image](https://github.com/ConorFee/MusicVisuals/assets/124153553/3490fcbb-ca93-4d77-a476-577c0ba979a1)
+
 My program  generates dynamic 3D terrain synchronized with an audio track. The program uses the Minim library to handle audio playback and analysis, creating visual effects based on the music. It initializes audio playback of our file "stayinit.mp3" and analyzes the audio buffer. The terrain's height is modulated by the audio amplitude, producing peaks and valleys that change with the music. Also, the background color transitions smoothly between colors over time. The text "stayinit" rotates in the 3D space, adding a visual focal point.
 
 For JVisual : C22493266
